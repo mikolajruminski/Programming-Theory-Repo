@@ -25,7 +25,7 @@ public class UberToster : DeluxeToster
         timeElapsed += Time.deltaTime;
         yield return null;
       }
-     Instantiate(GrilledCheese, transform.position + offset, gameObject.transform.rotation);
+     Instantiate(GrilledCheese, transform.position + offset, transform.rotation);
     }
 
     public void startToastingGrilledCheese() 
