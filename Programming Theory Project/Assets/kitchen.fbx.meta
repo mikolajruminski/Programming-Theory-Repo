@@ -3,7 +3,117 @@ guid: 767c2711570900746ad0d1890cde8926
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material
+    second: {fileID: 2100000, guid: 5b0d82ad916201b41a6cdc3abab452e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SZKLO
+    second: {fileID: 2100000, guid: 2e95574d9cc56cf4a949524925e52c31, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: WNETRZE PIEKARNIKA
+    second: {fileID: 2100000, guid: 1326b1971cf4e854ba21297ce1cd5b75, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: _drewno_
+    second: {fileID: 2100000, guid: a38f4c020c93d5b4c9133f692d123fc8, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: bialy
+    second: {fileID: 2100000, guid: eeda33389d1088f449165acffdc5aadc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: butelka
+    second: {fileID: 2100000, guid: 11141ce9286131d45bcf5f5132fa5568, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: czarne szklo
+    second: {fileID: 2100000, guid: ac9aa6edd3e77e443ac238ef59eb1f78, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: drzwi material
+    second: {fileID: 2100000, guid: 047bf4de64128fc48974022fdf9220c7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: etykieta
+    second: {fileID: 2100000, guid: 7590fa65365f32243aca075993925949, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: klamki lodowki
+    second: {fileID: 2100000, guid: 1402e7b4e5c3e1f48be48003c0ec815c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kolor butelka 2
+    second: {fileID: 2100000, guid: 0d5e448dba19c914abb95770daa70839, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kolor butelka 2.001
+    second: {fileID: 2100000, guid: 4bed043db60f71b47b20124103333af9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kolor etykieta 2
+    second: {fileID: 2100000, guid: fa2827320fdef4c439479d7e3ee9b91c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: korek
+    second: {fileID: 2100000, guid: b1c5261b9471b4c4abd51e9477f14cb1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kubek
+    second: {fileID: 2100000, guid: 506f37e39f0325e4da81577566db9a6e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kubek2
+    second: {fileID: 2100000, guid: 5e5a03fbf80f4394fa4c1980b9473e52, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: kubek3
+    second: {fileID: 2100000, guid: 16ee2d6e0e2eab0418bb70d0ff8ede57, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: lodowka
+    second: {fileID: 2100000, guid: ab9b4aae2e58e5c4386529b290cdbc05, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: niebieski
+    second: {fileID: 2100000, guid: 77ec8d268ba6f3b4dbd85a96837b114b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: podloga
+    second: {fileID: 2100000, guid: e46e32b2a780e7c49bc1b81786c5d72f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: polki
+    second: {fileID: 2100000, guid: cd4c5f0b09084fe4da0d21016ac6f1c1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: zaslony
+    second: {fileID: 2100000, guid: 5cc53a0a44be4e948944687ae29d7fe0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

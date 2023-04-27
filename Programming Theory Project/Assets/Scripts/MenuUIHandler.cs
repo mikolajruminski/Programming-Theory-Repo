@@ -8,6 +8,8 @@ public class MenuUIHandler : MonoBehaviour
     public int toasterNumber;
     private Button button;
     MainManager mainManagerScript;
+
+    public Vector3 positionOffset;
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +27,6 @@ public class MenuUIHandler : MonoBehaviour
 
     public void passVariable() 
     {
-      mainManagerScript.SpawnPickedToster(toasterNumber);
+      mainManagerScript.SpawnPickedToster(toasterNumber, positionOffset);
     }
 }

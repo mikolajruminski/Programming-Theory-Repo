@@ -19,7 +19,13 @@ public class MainManager : MonoBehaviour
     //cameras
 
     public Camera mainCamera, sideCamera;
+    public List<GameObject> lights = new List<GameObject>();
+    //
     bool isInPlace = false;
+    // sound effects
+
+    public AudioSource src;
+    public AudioClip src1;
     void Start()
     {
 
@@ -84,12 +90,23 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public void SpawnPickedToster(int number)
+    public void SpawnPickedToster(int number, Vector3 position)
     {
-        Instantiate(toasters[number], Spawnplace.transform.position, Quaternion.identity);
+        if (number == 0)
+        {
+        Instantiate(toasters[number], position, transform.rotation * Quaternion.Euler (0f, -90f, 0f));
         isTosterPicked = true;
         menuScreen.gameObject.SetActive(false);
         StartCoroutine(fadeCamera());
+        }
+        else 
+        {
+        Instantiate(toasters[number], position, Quaternion.identity);
+        isTosterPicked = true;
+        menuScreen.gameObject.SetActive(false);
+        StartCoroutine(fadeCamera());
+        }
+
 
     }
 
@@ -97,21 +114,29 @@ public class MainManager : MonoBehaviour
     {
         float time = 0;
 
-        while (time < 2.5f)
+        while (time < 2.85f)
         {
             mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, sideCamera.transform.position,
             ref velocity, speed * Time.deltaTime);
-            mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, sideCamera.transform.rotation, time/4);
+            mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, sideCamera.transform.rotation, time / 12);
 
             time += Time.deltaTime;
             yield return null;
 
         }
-        mainCamera.transform.position =  sideCamera.transform.position;
+        mainCamera.transform.position = sideCamera.transform.position;
         mainCamera.transform.rotation = sideCamera.transform.rotation;
 
         mainCamera.gameObject.SetActive(false);
         sideCamera.gameObject.SetActive(true);
         isInPlace = true;
+        lights[0].gameObject.SetActive(true);
+        lights[1].gameObject.SetActive(true);
+        src.clip = src1;
+        src.Play();
+        yield return new WaitForSeconds(1);
+        lights[2].gameObject.SetActive(true);
+        src.Play();
+
     }
 }

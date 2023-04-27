@@ -8,13 +8,17 @@ public class sideCameraMovement : MonoBehaviour
     float speed = 0.3f;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void LateUpdate()
-    {    if (GameObject.Find("Camera (1)") != null){
-         transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
-    }
+    {
+        Debug.Log(transform.rotation.y);
+        if (GameObject.Find("Camera (1)") != null)
+        {
+            transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
+
+        }
     }
 }
