@@ -9,7 +9,7 @@ public class Regular_Toster : MonoBehaviour
     public float toastTime;
     public GameObject toastedBread;
 
-    protected Vector3 offset = new Vector3 (0, 3f, 0);
+    protected Vector3 offset = new Vector3 (0, 1f, 0);
     void Start()
     {
         
@@ -30,8 +30,9 @@ public class Regular_Toster : MonoBehaviour
         timeElapsed += Time.deltaTime;
         yield return null;
       }
-     Instantiate(toastedBread, transform.position + offset, gameObject.transform.rotation);
+     Instantiate(toastedBread, transform.position + offset, new Quaternion(-0.707106829f,0,0,0.707106829f));
     }
+
 
     public void startToasting() 
     {

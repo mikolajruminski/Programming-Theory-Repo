@@ -6,13 +6,20 @@ public class MainManager : MonoBehaviour
 {
     // Start is called before the first frame update
     private GameObject tosterType;
-    private Vector3 spawnPlace = new Vector3(0f, 3.96f, -5.91f);
+    public GameObject Spawnplace;
     [SerializeField] List<GameObject> buttons = new List<GameObject>();
     [SerializeField] List<GameObject> toasters = new List<GameObject>();
     public GameObject menuScreen;
     Regular_Toster regularTosterScript;
     private GameObject findInitialToster;
     bool isTosterPicked = false;
+    public float speed = 1;
+    public Vector3 velocity = Vector3.zero;
+
+    //cameras
+
+    public Camera mainCamera, sideCamera;
+    bool isInPlace = false;
     void Start()
     {
 
@@ -21,7 +28,7 @@ public class MainManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-      SpawnButtons();
+        SpawnButtons();
     }
 
     public void ToastBread()
@@ -63,12 +70,12 @@ public class MainManager : MonoBehaviour
             {
                 buttons[0].SetActive(true);
             }
-            else if (findInitialToster.name == "DeluxeToster(Clone)")
+            else if (findInitialToster.name == "deluxeToaster(Clone)")
             {
                 buttons[0].SetActive(true);
                 buttons[1].SetActive(true);
             }
-            else if (findInitialToster.name == "UberToster(Clone)")
+            else if (findInitialToster.name == "UltimateToster(Clone)")
             {
                 buttons[0].SetActive(true);
                 buttons[1].SetActive(true);
@@ -77,11 +84,34 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public void SpawnPickedToster(int number) 
+    public void SpawnPickedToster(int number)
     {
-      Instantiate(toasters[number], spawnPlace, transform.rotation);
-      isTosterPicked = true;
-      menuScreen.gameObject.SetActive(false);
+        Instantiate(toasters[number], Spawnplace.transform.position, Quaternion.identity);
+        isTosterPicked = true;
+        menuScreen.gameObject.SetActive(false);
+        StartCoroutine(fadeCamera());
 
+    }
+
+    IEnumerator fadeCamera()
+    {
+        float time = 0;
+
+        while (time < 2.5f)
+        {
+            mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, sideCamera.transform.position,
+            ref velocity, speed * Time.deltaTime);
+            mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, sideCamera.transform.rotation, time/4);
+
+            time += Time.deltaTime;
+            yield return null;
+
+        }
+        mainCamera.transform.position =  sideCamera.transform.position;
+        mainCamera.transform.rotation = sideCamera.transform.rotation;
+
+        mainCamera.gameObject.SetActive(false);
+        sideCamera.gameObject.SetActive(true);
+        isInPlace = true;
     }
 }

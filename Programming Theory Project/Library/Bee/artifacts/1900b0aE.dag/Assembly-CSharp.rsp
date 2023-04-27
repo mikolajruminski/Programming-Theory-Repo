@@ -350,6 +350,7 @@
 "Assets/Scripts/MenuUIHandler.cs"
 "Assets/Scripts/Regular_Toster.cs"
 "Assets/Scripts/UberToster.cs"
+"Assets/sideCameraMovement.cs"
 -langversion:9.0
 
 /deterministic
