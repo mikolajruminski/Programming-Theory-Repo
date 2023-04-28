@@ -18,10 +18,10 @@ public class MainManager : MonoBehaviour
 
     //cameras
 
-    public Camera mainCamera, sideCamera;
+    public Camera mainCamera, sideCamera, closeUpCamera;
     public List<GameObject> lights = new List<GameObject>();
     //
-    bool isInPlace = false;
+    public bool isInPlace = false;
     // sound effects
 
     public AudioSource src;
@@ -138,5 +138,29 @@ public class MainManager : MonoBehaviour
         lights[2].gameObject.SetActive(true);
         src.Play();
 
+        isInPlace = true;
+    }
+
+   public IEnumerator SideToCloseupCamera() 
+    {
+
+      float time = 0;
+
+        while (time < 4f)
+        {
+            sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, closeUpCamera.transform.position,
+            ref velocity, speed * Time.deltaTime);
+            sideCamera.transform.rotation = Quaternion.Lerp(sideCamera.transform.rotation, closeUpCamera.transform.rotation, time / 36);
+
+            time += Time.deltaTime;
+            yield return null;
+
+        }
+         
+        sideCamera.transform.position = closeUpCamera.transform.position;
+        sideCamera.transform.rotation = closeUpCamera.transform.rotation;
+        isInPlace = false;
+        sideCamera.gameObject.SetActive(false);
+        closeUpCamera.gameObject.SetActive(true);
     }
 }

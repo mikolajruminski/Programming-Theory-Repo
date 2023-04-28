@@ -860,8 +860,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921577318509241974}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.008353352, y: 0.000000007981434, z: 0.0016320122}
-  m_LocalScale: {x: 0.13462415, y: 0.020218408, z: 0.72664696}
+  m_LocalPosition: {x: -0.0081, y: 0.000000007981434, z: 0.0016320122}
+  m_LocalScale: {x: 0.05568055, y: 0.020218408, z: 0.72664696}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 932855695036396678}
@@ -1342,7 +1342,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4072254472269934563}
-  - component: {fileID: 5098306492571635079}
   - component: {fileID: 2750303520104543601}
   m_Layer: 0
   m_Name: UltimateToster
@@ -1378,19 +1377,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &5098306492571635079
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3731335033270924633}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &2750303520104543601
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1418,6 +1404,8 @@ GameObject:
   - component: {fileID: 932855695036396678}
   - component: {fileID: 8435095726828372504}
   - component: {fileID: 2664342820036295}
+  - component: {fileID: 6931534385004739520}
+  - component: {fileID: 1223430380725380795}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -1502,6 +1490,34 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &6931534385004739520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784526911009094252}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304e1d2d932c3d84b978483d20e163b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Hue: 242
+  m_Saturation: 69
+  m_Value: 100.08
+--- !u!65 &1223430380725380795
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784526911009094252}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.019967375, y: 0.01989088, z: 0.020215893}
+  m_Center: {x: 0.000016312877, y: 0.00000025828678, z: 0.00010793726}
 --- !u!1 &4010815041240923241
 GameObject:
   m_ObjectHideFlags: 0
@@ -2265,6 +2281,8 @@ GameObject:
   - component: {fileID: 566096292436349667}
   - component: {fileID: 3061495303699418240}
   - component: {fileID: 3387004265858394253}
+  - component: {fileID: 1800328894826772209}
+  - component: {fileID: 8581279920621326356}
   m_Layer: 0
   m_Name: galka mala 1
   m_TagString: Untagged
@@ -2338,6 +2356,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1800328894826772209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106464710432530894}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304e1d2d932c3d84b978483d20e163b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Hue: 0
+  m_Saturation: 0
+  m_Value: 100
+--- !u!136 &8581279920621326356
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6106464710432530894}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.011638291
+  m_Height: 0.019781468
+  m_Direction: 1
+  m_Center: {x: 0.00000011916084, y: 0.0001092618, z: 0.01}
 --- !u!1 &6249684365441951010
 GameObject:
   m_ObjectHideFlags: 0
@@ -2349,6 +2396,8 @@ GameObject:
   - component: {fileID: 818726802437644201}
   - component: {fileID: 6060400215926973825}
   - component: {fileID: 1132104285598054807}
+  - component: {fileID: 5873221296414576010}
+  - component: {fileID: 6283706137374507055}
   m_Layer: 0
   m_Name: galka mala 1.002
   m_TagString: Untagged
@@ -2422,6 +2471,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &5873221296414576010
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249684365441951010}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304e1d2d932c3d84b978483d20e163b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Hue: 0
+  m_Saturation: 0
+  m_Value: 100
+--- !u!136 &6283706137374507055
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6249684365441951010}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.011638291
+  m_Height: 0.019781468
+  m_Direction: 1
+  m_Center: {x: -4.8455295e-11, y: 0.0001092618, z: 0.01}
 --- !u!1 &6403173494823388915
 GameObject:
   m_ObjectHideFlags: 0
@@ -2517,6 +2595,8 @@ GameObject:
   - component: {fileID: 1011517031383620011}
   - component: {fileID: 35493679079951710}
   - component: {fileID: 6792281366308584435}
+  - component: {fileID: 4750916816280674805}
+  - component: {fileID: 7353864583699570159}
   m_Layer: 0
   m_Name: galka mala 1.001
   m_TagString: Untagged
@@ -2590,6 +2670,35 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &4750916816280674805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797868334726345608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 304e1d2d932c3d84b978483d20e163b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Hue: 0
+  m_Saturation: 0
+  m_Value: 100
+--- !u!136 &7353864583699570159
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6797868334726345608}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.011638291
+  m_Height: 0.019781468
+  m_Direction: 1
+  m_Center: {x: -0.00000011925775, y: 0.0001092618, z: 0.01}
 --- !u!1 &6879689173875505313
 GameObject:
   m_ObjectHideFlags: 0
