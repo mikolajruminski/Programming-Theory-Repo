@@ -75,11 +75,15 @@ public class MainManager : MonoBehaviour
             if (findInitialToster.name == "RegularToster(Clone)")
             {
                 buttons[0].SetActive(true);
+                
             }
             else if (findInitialToster.name == "deluxeToaster(Clone)")
             {
                 buttons[0].SetActive(true);
-                buttons[1].SetActive(true);
+                buttons[1].SetActive(true); 
+                buttons[0].transform.localPosition = new Vector3(-124.400002f,-104.599998f,32);
+                buttons[1].transform.localPosition = new Vector3(-124,-140.300003f,32);
+                
             }
             else if (findInitialToster.name == "UltimateToster(Clone)")
             {
@@ -129,7 +133,6 @@ public class MainManager : MonoBehaviour
 
         mainCamera.gameObject.SetActive(false);
         sideCamera.gameObject.SetActive(true);
-        isInPlace = true;
         lights[0].gameObject.SetActive(true);
         lights[1].gameObject.SetActive(true);
         src.clip = src1;
@@ -145,7 +148,7 @@ public class MainManager : MonoBehaviour
     {
 
       float time = 0;
-
+      isInPlace = false;
         while (time < 4f)
         {
             sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, closeUpCamera.transform.position,
@@ -159,7 +162,6 @@ public class MainManager : MonoBehaviour
          
         sideCamera.transform.position = closeUpCamera.transform.position;
         sideCamera.transform.rotation = closeUpCamera.transform.rotation;
-        isInPlace = false;
         sideCamera.gameObject.SetActive(false);
         closeUpCamera.gameObject.SetActive(true);
     }
