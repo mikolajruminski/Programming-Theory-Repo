@@ -8,27 +8,28 @@ public class UberToster : DeluxeToster
     public GameObject GrilledCheese;
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-     protected IEnumerator ToastGrilledCheese() 
+    protected IEnumerator ToastGrilledCheese()
     {
-      float timeElapsed = 0;
-      while (timeElapsed < toastTime)
-      {
-        Debug.Log(timeElapsed);
-        timeElapsed += Time.deltaTime;
-        yield return null;
-      }
-     Instantiate(GrilledCheese, transform.position + offset, transform.rotation);
+        StartCoroutine(playSounds());
+        float timeElapsed = 0;
+        while (timeElapsed < toastTime)
+        {
+            Debug.Log(timeElapsed);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        Instantiate(GrilledCheese, new Vector3(-0.0274314601f,2.58099985f,-8.36600018f), transform.rotation);
     }
 
-    public void startToastingGrilledCheese() 
+    public void startToastingGrilledCheese()
     {
         StartCoroutine(ToastGrilledCheese());
     }

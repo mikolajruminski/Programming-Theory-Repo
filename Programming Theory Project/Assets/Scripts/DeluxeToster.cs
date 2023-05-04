@@ -8,28 +8,29 @@ public class DeluxeToster : Regular_Toster
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    protected IEnumerator ToastBagel() 
+    protected IEnumerator ToastBagel()
     {
-      float timeElapsed = 0;
-      while (timeElapsed < toastTime)
-      {
-        Debug.Log(timeElapsed);
-        timeElapsed += Time.deltaTime;
-        yield return null;
-      }
-     Instantiate(toastedBagel, transform.position + offset, gameObject.transform.rotation);
+        StartCoroutine(playSounds());
+        float timeElapsed = 0;
+        while (timeElapsed < toastTime)
+        {
+            Debug.Log(timeElapsed);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        Instantiate(toastedBagel, new Vector3(-0.175762713f,2.24206877f,-8.16699982f), gameObject.transform.rotation);
     }
 
-    public void startToastingBagel() 
+    public void startToastingBagel()
     {
         StartCoroutine(ToastBagel());
     }

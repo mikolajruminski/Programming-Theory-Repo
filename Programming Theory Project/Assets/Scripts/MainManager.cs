@@ -22,13 +22,15 @@ public class MainManager : MonoBehaviour
     public List<GameObject> lights = new List<GameObject>();
     //
     public bool isInPlace = false;
+
+    private mouseHoverOver mouseHoverOverScript;
     // sound effects
 
     public AudioSource src;
-    public AudioClip src1;
+    public AudioClip src1, src2, src3;
     void Start()
     {
-
+    
     }
 
     // Update is called once per frame
@@ -75,6 +77,7 @@ public class MainManager : MonoBehaviour
             if (findInitialToster.name == "RegularToster(Clone)")
             {
                 buttons[0].SetActive(true);
+                buttons[0].transform.localPosition = new Vector3(-93.8000031f,-44.9000015f,32);
                 
             }
             else if (findInitialToster.name == "deluxeToaster(Clone)")
@@ -118,7 +121,7 @@ public class MainManager : MonoBehaviour
     {
         float time = 0;
 
-        while (time < 2.85f)
+        while (time < 3.5f)
         {
             mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, sideCamera.transform.position,
             ref velocity, speed * Time.deltaTime);

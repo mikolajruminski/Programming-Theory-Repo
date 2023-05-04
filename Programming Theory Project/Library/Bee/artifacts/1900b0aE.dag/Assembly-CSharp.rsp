@@ -351,6 +351,7 @@
 "Assets/Scripts/mouseHoverOver.cs"
 "Assets/Scripts/Regular_Toster.cs"
 "Assets/Scripts/UberToster.cs"
+"Assets/Scripts/zaciagnijZaciagnik.cs"
 "Assets/sideCameraMovement.cs"
 -langversion:9.0
 

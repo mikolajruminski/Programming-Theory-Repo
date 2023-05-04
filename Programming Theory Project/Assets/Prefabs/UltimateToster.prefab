@@ -1391,8 +1391,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toastTime: 1.5
   toastedBread: {fileID: 7964451725977634568, guid: a395878964af0b745b80854188dcd7e9, type: 3}
-  toastedBagel: {fileID: 6093226243920271271, guid: a6e63629171934547b7811da04012ef2, type: 3}
-  GrilledCheese: {fileID: 7170806841302720954, guid: 49b823a588650a8459bc2187082619e2, type: 3}
+  toastedBagel: {fileID: 6687911812159269421, guid: e9ee062fd5f9def4da0698a4db27e3c0, type: 3}
+  GrilledCheese: {fileID: 3760532483985437761, guid: c16209a65cb91e3429d4e38c24b7ea33, type: 3}
 --- !u!1 &3784526911009094252
 GameObject:
   m_ObjectHideFlags: 0

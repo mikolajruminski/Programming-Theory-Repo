@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toastTime: 2
   toastedBread: {fileID: 7964451725977634568, guid: a395878964af0b745b80854188dcd7e9, type: 3}
-  toastedBagel: {fileID: 6093226243920271271, guid: a6e63629171934547b7811da04012ef2, type: 3}
+  toastedBagel: {fileID: 6687911812159269421, guid: e9ee062fd5f9def4da0698a4db27e3c0, type: 3}
 --- !u!1 &3876939733632253418
 GameObject:
   m_ObjectHideFlags: 0
