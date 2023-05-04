@@ -27,7 +27,8 @@ public class DeluxeToster : Regular_Toster
             timeElapsed += Time.deltaTime;
             yield return null;
         }
-        Instantiate(toastedBagel, new Vector3(-0.175762713f,2.24206877f,-8.16699982f), gameObject.transform.rotation);
+        Instantiate(toastedBagel, transform.position, gameObject.transform.rotation);
+        StartCoroutine(jumpToasts(GameObject.Find("bagel wypieczony(Clone)"), new Vector3(-0.00700000022f,2.25999999f,-8.28999996f)));
     }
 
     public void startToastingBagel()

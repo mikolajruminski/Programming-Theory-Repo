@@ -28,7 +28,7 @@ public class mouseHoverOver : MonoBehaviour
         {
             rendere.material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_Value / 100);
         }
-        else if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube")
+        else if (mainManager.closeUpCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
         {
             rendere.material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_Value / 100);
         }
@@ -40,8 +40,12 @@ public class mouseHoverOver : MonoBehaviour
 
     private void OnMouseDown()
     {
-        StartCoroutine(mainManager.SideToCloseupCamera());
-        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube")
+        if (mainManager.isInPlace)
+        {
+            StartCoroutine(mainManager.SideToCloseupCamera());
+        }
+
+        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
         {
             StartCoroutine(pushButtons(offset));
         }
@@ -49,7 +53,7 @@ public class mouseHoverOver : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube")
+        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
         {
             StartCoroutine(pushButtons(-offset));
 
@@ -59,7 +63,7 @@ public class mouseHoverOver : MonoBehaviour
     //IENUMERATORS
     private IEnumerator pushButtons(Vector3 pushOffset)
     {
-        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube")
+        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
         {
             float time = 0;
 

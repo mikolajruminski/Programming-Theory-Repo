@@ -1053,6 +1053,30 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   toastTime: 2
   toastedBread: {fileID: 7964451725977634568, guid: a395878964af0b745b80854188dcd7e9, type: 3}
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 6.3049054
+      outSlope: 6.3049054
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.159729
+      value: 1.0070763
+      inSlope: 6.3049054
+      outSlope: 6.3049054
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   toastedBagel: {fileID: 6687911812159269421, guid: e9ee062fd5f9def4da0698a4db27e3c0, type: 3}
 --- !u!1 &3876939733632253418
 GameObject:

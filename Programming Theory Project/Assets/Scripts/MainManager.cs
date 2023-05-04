@@ -15,6 +15,8 @@ public class MainManager : MonoBehaviour
     bool isTosterPicked = false;
     public float speed = 1;
     public Vector3 velocity = Vector3.zero;
+    public bool isSideCameraActive = false;
+    [SerializeField] private AnimationCurve _curve;
 
     //cameras
 
@@ -28,15 +30,22 @@ public class MainManager : MonoBehaviour
 
     public AudioSource src;
     public AudioClip src1, src2, src3;
+
+    //Last lerping, 3 positions + rotation
+    Vector3 rotPos1 = new Vector3(-19f, -269.81f, 0f);
+    Vector3 rotPos2 = new Vector3(0, -180, 0);
+    Vector3 pos1 = new Vector3(-2.073f, 1.53f, -7.375f);
+    Vector3 pos2 = new Vector3(-0.03f, 1.53f, -6.913f);
+    Vector3 pos3 = new Vector3(-0.03f, 2.271f, -6.913433f);
     void Start()
     {
-    
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        SpawnButtons();
+
     }
 
     public void ToastBread()
@@ -77,16 +86,16 @@ public class MainManager : MonoBehaviour
             if (findInitialToster.name == "RegularToster(Clone)")
             {
                 buttons[0].SetActive(true);
-                buttons[0].transform.localPosition = new Vector3(-93.8000031f,-44.9000015f,32);
-                
+                buttons[0].transform.localPosition = new Vector3(-93.8000031f, -44.9000015f, 32);
+
             }
             else if (findInitialToster.name == "deluxeToaster(Clone)")
             {
                 buttons[0].SetActive(true);
-                buttons[1].SetActive(true); 
-                buttons[0].transform.localPosition = new Vector3(-124.400002f,-104.599998f,32);
-                buttons[1].transform.localPosition = new Vector3(-124,-140.300003f,32);
-                
+                buttons[1].SetActive(true);
+                buttons[0].transform.localPosition = new Vector3(-124.400002f, -104.599998f, 32);
+                buttons[1].transform.localPosition = new Vector3(-124, -140.300003f, 32);
+
             }
             else if (findInitialToster.name == "UltimateToster(Clone)")
             {
@@ -101,22 +110,23 @@ public class MainManager : MonoBehaviour
     {
         if (number == 0)
         {
-        Instantiate(toasters[number], position, transform.rotation * Quaternion.Euler (0f, -90f, 0f));
-        isTosterPicked = true;
-        menuScreen.gameObject.SetActive(false);
-        StartCoroutine(fadeCamera());
+            Instantiate(toasters[number], position, transform.rotation * Quaternion.Euler(0f, -90f, 0f));
+            isTosterPicked = true;
+            menuScreen.gameObject.SetActive(false);
+            StartCoroutine(fadeCamera());
         }
-        else 
+        else
         {
-        Instantiate(toasters[number], position, Quaternion.identity);
-        isTosterPicked = true;
-        menuScreen.gameObject.SetActive(false);
-        StartCoroutine(fadeCamera());
+            Instantiate(toasters[number], position, Quaternion.identity);
+            isTosterPicked = true;
+            menuScreen.gameObject.SetActive(false);
+            StartCoroutine(fadeCamera());
         }
 
 
     }
 
+    //COROUTINES
     IEnumerator fadeCamera()
     {
         float time = 0;
@@ -147,11 +157,11 @@ public class MainManager : MonoBehaviour
         isInPlace = true;
     }
 
-   public IEnumerator SideToCloseupCamera() 
+    public IEnumerator SideToCloseupCamera()
     {
 
-      float time = 0;
-      isInPlace = false;
+        float time = 0;
+        isInPlace = false;
         while (time < 4f)
         {
             sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, closeUpCamera.transform.position,
@@ -162,10 +172,54 @@ public class MainManager : MonoBehaviour
             yield return null;
 
         }
-         
+
         sideCamera.transform.position = closeUpCamera.transform.position;
         sideCamera.transform.rotation = closeUpCamera.transform.rotation;
         sideCamera.gameObject.SetActive(false);
         closeUpCamera.gameObject.SetActive(true);
+        isSideCameraActive = true;
+        SpawnButtons();
     }
+
+    public IEnumerator lookAtToast()
+    {
+        float lerpSpeed = 0.2f;
+        float time = 0;
+        while (time < 0.08f)
+        {
+            closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, Quaternion.Euler(rotPos1), _curve.Evaluate(time));
+
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
+        }
+
+        time = 0;
+        while (time < 0.05f)
+        {
+            closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, pos1, _curve.Evaluate(time));
+
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
+        }
+
+        time = 0;
+        while (time < 0.10f)
+        {
+            closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, pos2, _curve.Evaluate(time));
+            closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, Quaternion.Euler(rotPos2), _curve.Evaluate(time));
+
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
+        }
+
+         time = 0;
+        while (time < 0.10f)
+        {
+            closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, pos3, _curve.Evaluate(time));
+
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
+        }
+    }
+
 }
