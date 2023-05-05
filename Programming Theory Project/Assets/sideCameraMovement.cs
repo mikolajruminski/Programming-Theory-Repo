@@ -6,7 +6,7 @@ public class sideCameraMovement : MonoBehaviour
 {
     // Start is called before the first frame update
     MainManager mainManager;
-    float speed = 0.3f;
+    float speed = 0.4f;
     void Start()
     {
       mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
@@ -15,7 +15,7 @@ public class sideCameraMovement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (GameObject.Find("Camera (1)") != null && mainManager.isInPlace)
+        if (mainManager.isCameraCloseUp)
         {
             transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
 

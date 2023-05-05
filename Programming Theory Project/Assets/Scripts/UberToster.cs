@@ -28,6 +28,7 @@ public class UberToster : DeluxeToster
         }
         Instantiate(GrilledCheese, transform.position, transform.rotation);
         StartCoroutine(jumpToasts(GameObject.Find("grilled cheeese wypieczony(Clone)"), new Vector3(-0.00700000022f,2.25999999f,-8.44799995f)));
+        StartCoroutine(mainManager.lookAtToast());
     }
 
     public void startToastingGrilledCheese()

@@ -29,6 +29,7 @@ public class DeluxeToster : Regular_Toster
         }
         Instantiate(toastedBagel, transform.position, gameObject.transform.rotation);
         StartCoroutine(jumpToasts(GameObject.Find("bagel wypieczony(Clone)"), new Vector3(-0.00700000022f,2.25999999f,-8.28999996f)));
+        StartCoroutine(mainManager.lookAtToast());
     }
 
     public void startToastingBagel()

@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Toaster
   - zaciagnik
+  - Toast
   layers:
   - Default
   - TransparentFX

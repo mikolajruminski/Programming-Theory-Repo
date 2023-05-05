@@ -8,7 +8,7 @@ public class Regular_Toster : MonoBehaviour
 
     public float toastTime;
     public GameObject toastedBread;
-    MainManager mainManager;
+    protected MainManager mainManager;
     zaciagnijZaciagnik zaciagnikScript;
     public AnimationCurve animationCurve;
 

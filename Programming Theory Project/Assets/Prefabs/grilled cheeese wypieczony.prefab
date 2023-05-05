@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4256253302649590029}
   m_Layer: 0
   m_Name: grilled cheeese wypieczony
-  m_TagString: Untagged
+  m_TagString: Toast
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

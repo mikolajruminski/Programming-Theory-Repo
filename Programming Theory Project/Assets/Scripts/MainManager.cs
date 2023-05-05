@@ -20,16 +20,19 @@ public class MainManager : MonoBehaviour
 
     //cameras
 
-    public Camera mainCamera, sideCamera, closeUpCamera;
+    public Camera mainCamera, sideCamera, closeUpCamera, toastViewCamera;
     public List<GameObject> lights = new List<GameObject>();
     //
     public bool isInPlace = false;
+    public bool isCameraCloseUp = false;
 
     private mouseHoverOver mouseHoverOverScript;
     // sound effects
 
     public AudioSource src;
+    public AudioSource srcMainManager;
     public AudioClip src1, src2, src3;
+    [SerializeField] List<AudioClip> swooshSounds = new List<AudioClip>();
 
     //Last lerping, 3 positions + rotation
     Vector3 rotPos1 = new Vector3(-19f, -269.81f, 0f);
@@ -185,15 +188,22 @@ public class MainManager : MonoBehaviour
     {
         float lerpSpeed = 0.2f;
         float time = 0;
+        srcMainManager.clip = swooshSounds[0];
+        srcMainManager.Play();
+
         while (time < 0.08f)
         {
             closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, Quaternion.Euler(rotPos1), _curve.Evaluate(time));
-
             time += Time.deltaTime * lerpSpeed;
             yield return null;
         }
 
+
         time = 0;
+
+        srcMainManager.clip = swooshSounds[2];
+        srcMainManager.Play();
+
         while (time < 0.05f)
         {
             closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, pos1, _curve.Evaluate(time));
@@ -202,7 +212,13 @@ public class MainManager : MonoBehaviour
             yield return null;
         }
 
+
+
         time = 0;
+
+        srcMainManager.clip = swooshSounds[3];
+        srcMainManager.Play();
+
         while (time < 0.10f)
         {
             closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, pos2, _curve.Evaluate(time));
@@ -212,14 +228,27 @@ public class MainManager : MonoBehaviour
             yield return null;
         }
 
-         time = 0;
+
+
+        time = 0;
+
+        srcMainManager.clip = swooshSounds[4];
+        srcMainManager.Play();
+
         while (time < 0.10f)
         {
-            closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, pos3, _curve.Evaluate(time));
+            closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, toastViewCamera.transform.position, _curve.Evaluate(time));
+            closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, toastViewCamera.transform.rotation, _curve.Evaluate(time));
 
             time += Time.deltaTime * lerpSpeed;
             yield return null;
         }
+        closeUpCamera.transform.position = toastViewCamera.transform.position;
+        closeUpCamera.transform.rotation = toastViewCamera.transform.rotation;
+        closeUpCamera.gameObject.SetActive(false);
+        toastViewCamera.gameObject.SetActive(true);
+
+       isCameraCloseUp = true;
     }
 
 }
