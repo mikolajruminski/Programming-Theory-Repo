@@ -1674,6 +1674,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 0
     m_RotationOrder: 4
+  smallLights: []
 --- !u!1 &7361087838117742404
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,7 +2103,7 @@ GameObject:
   - component: {fileID: 7096078540890621886}
   m_Layer: 0
   m_Name: Cylinder.008
-  m_TagString: Untagged
+  m_TagString: pivot
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

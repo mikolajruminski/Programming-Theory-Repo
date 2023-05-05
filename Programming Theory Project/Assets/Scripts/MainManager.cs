@@ -9,6 +9,7 @@ public class MainManager : MonoBehaviour
     public GameObject Spawnplace;
     [SerializeField] List<GameObject> buttons = new List<GameObject>();
     [SerializeField] List<GameObject> toasters = new List<GameObject>();
+
     public GameObject menuScreen;
     Regular_Toster regularTosterScript;
     private GameObject findInitialToster;
@@ -235,7 +236,7 @@ public class MainManager : MonoBehaviour
         srcMainManager.clip = swooshSounds[4];
         srcMainManager.Play();
 
-        while (time < 0.10f)
+        while (time < 0.12f)
         {
             closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, toastViewCamera.transform.position, _curve.Evaluate(time));
             closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, toastViewCamera.transform.rotation, _curve.Evaluate(time));

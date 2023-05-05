@@ -15,10 +15,13 @@ public class sideCameraMovement : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (mainManager.isCameraCloseUp)
+        if (mainManager.sideCamera.gameObject !=null && mainManager.isInPlace)
         {
-            transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
-
+            GameObject.Find("spawnPlace").transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
+        }
+        else if (mainManager.closeUpCamera.gameObject != null && mainManager.isCameraCloseUp) 
+        {
+            GameObject.Find("ToastPosition").transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
         }
     }
 }

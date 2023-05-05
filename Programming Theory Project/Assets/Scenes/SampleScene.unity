@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!108 &20570596
 Light:
   m_ObjectHideFlags: 0
@@ -1190,7 +1190,6 @@ GameObject:
   m_Component:
   - component: {fileID: 533326143}
   - component: {fileID: 533326145}
-  - component: {fileID: 533326144}
   m_Layer: 0
   m_Name: ToastAroundCamera
   m_TagString: Untagged
@@ -1213,21 +1212,6 @@ Transform:
   m_Father: {fileID: 2107960890}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
---- !u!114 &533326144
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533326142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c1bc119ce79aa9439708f326827b1ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainManager: {fileID: 0}
-  speed: 0.3
-  isInPosition: 0
 --- !u!20 &533326145
 Camera:
   m_ObjectHideFlags: 0
@@ -1696,7 +1680,6 @@ GameObject:
   m_Component:
   - component: {fileID: 974067482}
   - component: {fileID: 974067481}
-  - component: {fileID: 974067483}
   m_Layer: 0
   m_Name: CloseUpCamera
   m_TagString: Untagged
@@ -1762,21 +1745,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: -269.891, z: 0}
---- !u!114 &974067483
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 974067480}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c1bc119ce79aa9439708f326827b1ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainManager: {fileID: 0}
-  speed: 0.3
-  isInPosition: 0
 --- !u!1 &1021631165
 GameObject:
   m_ObjectHideFlags: 0
@@ -2951,8 +2919,8 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 13.4
+  m_Intensity: 1.5
+  m_Range: 14.66
   m_SpotAngle: 21
   m_InnerSpotAngle: 2.8
   m_CookieSize: 10

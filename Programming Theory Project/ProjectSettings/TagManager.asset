@@ -7,6 +7,8 @@ TagManager:
   - Toaster
   - zaciagnik
   - Toast
+  - pivot
+  - smallLight
   layers:
   - Default
   - TransparentFX

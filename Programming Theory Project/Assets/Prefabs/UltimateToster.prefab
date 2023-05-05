@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5720462628899682421}
   m_Layer: 0
   m_Name: Sphere.001
-  m_TagString: Untagged
+  m_TagString: smallLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -363,7 +363,7 @@ Transform:
   m_LocalScale: {x: 0.020997947, y: 0.14557245, z: 0.19902363}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1805645295273444395}
+  - {fileID: 8723096091824640303}
   m_Father: {fileID: 932855695036396678}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 6.67, z: 0}
@@ -1250,6 +1250,38 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2897509264111345713
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8723096091824640303}
+  m_Layer: 0
+  m_Name: pivotWskaznika
+  m_TagString: pivot
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8723096091824640303
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2897509264111345713}
+  m_LocalRotation: {x: 0.60876137, y: 0, z: 0, w: 0.7933534}
+  m_LocalPosition: {x: -0.0042, y: 0.00041, z: -0.00636}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1805645295273444395}
+  m_Father: {fileID: 360313228710707952}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 75, y: 0, z: 0}
 --- !u!1 &3006857294050215039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1415,6 +1447,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  smallLights: []
   toastedBagel: {fileID: 6687911812159269421, guid: e9ee062fd5f9def4da0698a4db27e3c0, type: 3}
   GrilledCheese: {fileID: 3760532483985437761, guid: c16209a65cb91e3429d4e38c24b7ea33, type: 3}
 --- !u!1 &3784526911009094252
@@ -1638,7 +1671,7 @@ GameObject:
   - component: {fileID: 2023266948688838435}
   m_Layer: 0
   m_Name: to co zaciagazs
-  m_TagString: Untagged
+  m_TagString: zaciagnik
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1651,7 +1684,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4071961971456161741}
   m_LocalRotation: {x: 0.0000000144716585, y: 0.08194666, z: 0.0000001568192, w: 0.99663675}
-  m_LocalPosition: {x: -0.010227222, y: 0.000000013895333, z: -0.0053897146}
+  m_LocalPosition: {x: -0.010227222, y: 0, z: 0.00715}
   m_LocalScale: {x: 0.054639447, y: 0.07577669, z: 0.010138136}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1820,12 +1853,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4742832093028100562}
-  m_LocalRotation: {x: -0.11435694, y: -0.06106811, z: -0.052326996, w: 0.99017936}
-  m_LocalPosition: {x: -0.005004921, y: 0.0010546899, z: -0.002809081}
-  m_LocalScale: {x: 0.034769315, y: 0.08992539, z: 0.38895395}
+  m_LocalRotation: {x: -0.11435694, y: -0.061068095, z: -0.052326977, w: 0.99017936}
+  m_LocalPosition: {x: -0.0008049123, y: 0.0006446169, z: 0.0035509262}
+  m_LocalScale: {x: 0.034769326, y: 0.0899254, z: 0.38895375}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 360313228710707952}
+  m_Father: {fileID: 8723096091824640303}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &950188185336584767
@@ -2141,7 +2174,7 @@ GameObject:
   - component: {fileID: 7540635667043708274}
   m_Layer: 0
   m_Name: Sphere
-  m_TagString: Untagged
+  m_TagString: smallLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3235,7 +3268,7 @@ GameObject:
   - component: {fileID: 7048026641564274346}
   m_Layer: 0
   m_Name: Sphere.002
-  m_TagString: Untagged
+  m_TagString: smallLight
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
