@@ -23,5 +23,12 @@ public class sideCameraMovement : MonoBehaviour
         {
             GameObject.Find("ToastPosition").transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
         }
+      
+       if (mainManager.isCameraCloseUp && Input.GetKeyDown(KeyCode.K) &&mainManager.toastViewCamera.gameObject != null)  
+       {
+        StartCoroutine(mainManager.lookAtToasterFromToastView());
+       }
+
+
     }
 }

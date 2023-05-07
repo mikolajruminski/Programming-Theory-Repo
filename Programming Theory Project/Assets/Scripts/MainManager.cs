@@ -42,10 +42,15 @@ public class MainManager : MonoBehaviour
     Vector3 rotPos2 = new Vector3(0, -180, 0);
     Vector3 pos1 = new Vector3(-2.073f, 1.53f, -7.375f);
     Vector3 pos2 = new Vector3(-0.03f, 1.53f, -6.913f);
-    Vector3 pos3 = new Vector3(-0.03f, 2.271f, -6.913433f);
+    Vector3 toastViewCameraInitialPosition;
+    Quaternion toastViewCameraInitialRotation;
+    Vector3 closeUpCameraInitialPosition = new Vector3(-2.07299995f, 1.52999997f, -8.51399994f);
+    Vector3 closeUpCameraInitialRotation = new Vector3(0, -269.891f, 0);
     void Start()
     {
-      StartCoroutine(loadMenu());
+        StartCoroutine(loadMenu());
+        toastViewCameraInitialPosition = toastViewCamera.transform.position;
+        toastViewCameraInitialRotation = toastViewCamera.transform.rotation;
     }
 
     // Update is called once per frame
@@ -240,21 +245,80 @@ public class MainManager : MonoBehaviour
 
         while (time < 0.12f)
         {
-            closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, toastViewCamera.transform.position, _curve.Evaluate(time));
-            closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, toastViewCamera.transform.rotation, _curve.Evaluate(time));
+            closeUpCamera.transform.position = Vector3.Lerp(closeUpCamera.transform.position, toastViewCameraInitialPosition, _curve.Evaluate(time));
+            closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, toastViewCameraInitialRotation, _curve.Evaluate(time));
 
             time += Time.deltaTime * lerpSpeed;
             yield return null;
         }
-        closeUpCamera.transform.position = toastViewCamera.transform.position;
-        closeUpCamera.transform.rotation = toastViewCamera.transform.rotation;
+        closeUpCamera.transform.position = toastViewCameraInitialPosition;
+        closeUpCamera.transform.rotation = toastViewCameraInitialRotation;
+        
         closeUpCamera.gameObject.SetActive(false);
         toastViewCamera.gameObject.SetActive(true);
-
-       isCameraCloseUp = true;
+        toastViewCamera.transform.position = toastViewCameraInitialPosition;
+        toastViewCamera.transform.rotation = toastViewCameraInitialRotation;
+        isCameraCloseUp = true;
     }
 
-    IEnumerator loadMenu () 
+    public IEnumerator lookAtToasterFromToastView()
+    {
+        float lerpSpeed = 0.2f;
+        float time = 0;
+        time = 0;
+
+        srcMainManager.clip = swooshSounds[4];
+        srcMainManager.Play();
+
+        while (time < 0.12f)
+        {
+            toastViewCamera.transform.position = Vector3.Lerp(toastViewCamera.transform.position, pos2, _curve.Evaluate(time));
+            toastViewCamera.transform.rotation = Quaternion.Lerp(toastViewCamera.transform.rotation, Quaternion.Euler(new Vector3(359.677063f, 177.963547f, 359.689362f)), _curve.Evaluate(time));
+
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
+        }
+
+
+        time = 0;
+        srcMainManager.clip = swooshSounds[3];
+        srcMainManager.Play();
+
+        while (time < 0.10f)
+        {
+            toastViewCamera.transform.position = Vector3.Lerp(toastViewCamera.transform.position, pos1, _curve.Evaluate(time));
+
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
+        }
+
+        time = 0;
+
+        srcMainManager.clip = swooshSounds[2];
+        srcMainManager.Play();
+
+        while (time < 0.05f)
+        {
+            toastViewCamera.transform.position = Vector3.Lerp(toastViewCamera.transform.position, closeUpCameraInitialPosition, _curve.Evaluate(time));
+            toastViewCamera.transform.rotation = Quaternion.Lerp(toastViewCamera.transform.rotation, Quaternion.Euler(closeUpCameraInitialRotation), _curve.Evaluate(time));
+
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
+        }
+        closeUpCamera.transform.position = closeUpCameraInitialPosition;
+        closeUpCamera.transform.rotation = Quaternion.Euler(closeUpCameraInitialRotation);
+
+        isSideCameraActive = true;
+        isCameraCloseUp = false;
+
+        toastViewCamera.gameObject.SetActive(false);
+        closeUpCamera.gameObject.SetActive(true);
+        
+        
+
+    }
+
+    IEnumerator loadMenu()
     {
         yield return new WaitForSeconds(2);
         Canvas.gameObject.SetActive(true);
