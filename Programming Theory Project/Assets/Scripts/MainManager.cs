@@ -10,6 +10,9 @@ public class MainManager : MonoBehaviour
     [SerializeField] List<GameObject> buttons = new List<GameObject>();
     [SerializeField] List<GameObject> toasters = new List<GameObject>();
 
+    public List<GameObject> lights = new List<GameObject>();
+    [SerializeField] GameObject Canvas;
+
     public GameObject menuScreen;
     Regular_Toster regularTosterScript;
     private GameObject findInitialToster;
@@ -22,7 +25,6 @@ public class MainManager : MonoBehaviour
     //cameras
 
     public Camera mainCamera, sideCamera, closeUpCamera, toastViewCamera;
-    public List<GameObject> lights = new List<GameObject>();
     //
     public bool isInPlace = false;
     public bool isCameraCloseUp = false;
@@ -32,7 +34,7 @@ public class MainManager : MonoBehaviour
 
     public AudioSource src;
     public AudioSource srcMainManager;
-    public AudioClip src1, src2, src3;
+    [SerializeField] public List<AudioClip> reflectorSounds = new List<AudioClip>();
     [SerializeField] List<AudioClip> swooshSounds = new List<AudioClip>();
 
     //Last lerping, 3 positions + rotation
@@ -43,7 +45,7 @@ public class MainManager : MonoBehaviour
     Vector3 pos3 = new Vector3(-0.03f, 2.271f, -6.913433f);
     void Start()
     {
-
+      StartCoroutine(loadMenu());
     }
 
     // Update is called once per frame
@@ -152,7 +154,7 @@ public class MainManager : MonoBehaviour
         sideCamera.gameObject.SetActive(true);
         lights[0].gameObject.SetActive(true);
         lights[1].gameObject.SetActive(true);
-        src.clip = src1;
+        src.clip = reflectorSounds[0];
         src.Play();
         yield return new WaitForSeconds(1);
         lights[2].gameObject.SetActive(true);
@@ -252,4 +254,12 @@ public class MainManager : MonoBehaviour
        isCameraCloseUp = true;
     }
 
+    IEnumerator loadMenu () 
+    {
+        yield return new WaitForSeconds(2);
+        Canvas.gameObject.SetActive(true);
+        src.clip = reflectorSounds[3];
+        lights[3].gameObject.SetActive(true);
+        src.Play();
+    }
 }

@@ -40,8 +40,5 @@ public class zaciagnijZaciagnik : MonoBehaviour
             time += Time.deltaTime;
             yield return null;
         }
-
-        
-
     }
 }

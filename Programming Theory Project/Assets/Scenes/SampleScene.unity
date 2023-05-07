@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &20570596
 Light:
   m_ObjectHideFlags: 0
@@ -257,6 +257,12 @@ MonoBehaviour:
   - {fileID: 7295726218426700037, guid: a3382e6fee1ca6e408e4cb40a4747b96, type: 3}
   - {fileID: 3648397019538055178, guid: 93c5666295027804ea46aa247324131e, type: 3}
   - {fileID: 3731335033270924633, guid: 42202516a5f7707468e1e9c8e13c513f, type: 3}
+  lights:
+  - {fileID: 20570595}
+  - {fileID: 298523379}
+  - {fileID: 1634738308}
+  - {fileID: 4120430110741195693}
+  Canvas: {fileID: 1021631165}
   menuScreen: {fileID: 82865815}
   speed: 130
   velocity: {x: 0, y: 0, z: 0}
@@ -289,17 +295,15 @@ MonoBehaviour:
   sideCamera: {fileID: 837620743}
   closeUpCamera: {fileID: 974067481}
   toastViewCamera: {fileID: 533326145}
-  lights:
-  - {fileID: 20570595}
-  - {fileID: 298523379}
-  - {fileID: 1634738308}
   isInPlace: 0
   isCameraCloseUp: 0
   src: {fileID: 1021631170}
   srcMainManager: {fileID: 35789982}
-  src1: {fileID: 8300000, guid: ca6513bd9eef2784db0a448070e057ec, type: 3}
-  src2: {fileID: 8300000, guid: dc0a7f394dc98af469e03b5cdfe35b0b, type: 3}
-  src3: {fileID: 8300000, guid: 3ac4ac5922c70384293c2909eb591ddb, type: 3}
+  reflectorSounds:
+  - {fileID: 8300000, guid: ca6513bd9eef2784db0a448070e057ec, type: 3}
+  - {fileID: 8300000, guid: dc0a7f394dc98af469e03b5cdfe35b0b, type: 3}
+  - {fileID: 8300000, guid: 3ac4ac5922c70384293c2909eb591ddb, type: 3}
+  - {fileID: 8300000, guid: 8bd2367b24805b144b3f02637254f619, type: 3}
   swooshSounds:
   - {fileID: 8300000, guid: e4560f0b57f212b4f8aebed07c9f23e8, type: 3}
   - {fileID: 8300000, guid: 0908499314fad274081a996b3e92245a, type: 3}
@@ -1766,7 +1770,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1021631166
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2669,7 +2673,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1634738308}
   m_LocalRotation: {x: -0.83782184, y: -0.54538774, z: 0.020416377, w: -0.013781572}
-  m_LocalPosition: {x: -0.14443895, y: 0.05367303, z: 3.8179817}
+  m_LocalPosition: {x: 0.084, y: 0.05367303, z: 3.8179817}
   m_LocalScale: {x: 100, y: 100, z: 100}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2919,9 +2923,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.5
-  m_Range: 14.66
-  m_SpotAngle: 21
+  m_Intensity: 0.4
+  m_Range: 29.17
+  m_SpotAngle: 46
   m_InnerSpotAngle: 2.8
   m_CookieSize: 10
   m_Shadows:
@@ -2961,7 +2965,7 @@ Light:
   m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 41.8
+  m_BounceIntensity: 37.75
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
   m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
@@ -7007,7 +7011,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4171809601957089979
 Transform:
   m_ObjectHideFlags: 0

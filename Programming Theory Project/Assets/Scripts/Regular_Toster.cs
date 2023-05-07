@@ -57,12 +57,12 @@ public class Regular_Toster : MonoBehaviour
     protected IEnumerator playSounds()
     {
         mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
-        mainManager.src.clip = mainManager.src2;
+       mainManager.src.clip = mainManager.reflectorSounds[1];
         mainManager.src.Play();
 
         yield return new WaitForSeconds(toastTime);
 
-        mainManager.src.clip = mainManager.src3;
+       mainManager.src.clip = mainManager.reflectorSounds[2];
         mainManager.src.Play();
     }
     
