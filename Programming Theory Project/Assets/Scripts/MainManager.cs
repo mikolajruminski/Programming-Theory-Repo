@@ -15,12 +15,15 @@ public class MainManager : MonoBehaviour
 
     public GameObject menuScreen;
     Regular_Toster regularTosterScript;
+    zaciagnijZaciagnik zaciagnikScript;
     private GameObject findInitialToster;
     bool isTosterPicked = false;
     public float speed = 1;
     public Vector3 velocity = Vector3.zero;
     public bool isSideCameraActive = false;
     [SerializeField] private AnimationCurve _curve;
+
+    public bool hasSpawned = false;
 
     //cameras
 
@@ -62,7 +65,7 @@ public class MainManager : MonoBehaviour
     public void ToastBread()
     {
         tosterType = GameObject.FindGameObjectWithTag("Toaster");
-        regularTosterScript = tosterType.GetComponent<Regular_Toster>();
+        getScriptForToaster();
         if (regularTosterScript != null)
         {
             regularTosterScript.startToasting();
@@ -199,7 +202,7 @@ public class MainManager : MonoBehaviour
         srcMainManager.clip = swooshSounds[0];
         srcMainManager.Play();
 
-        while (time < 0.08f)
+        while (time < 0.10f)
         {
             closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, Quaternion.Euler(rotPos1), _curve.Evaluate(time));
             time += Time.deltaTime * lerpSpeed;
@@ -263,6 +266,8 @@ public class MainManager : MonoBehaviour
 
     public IEnumerator lookAtToasterFromToastView()
     {
+        getScriptForToaster();
+        regularTosterScript.lampSmallLights(0, 1);
         float lerpSpeed = 0.2f;
         float time = 0;
         time = 0;
@@ -296,8 +301,9 @@ public class MainManager : MonoBehaviour
 
         srcMainManager.clip = swooshSounds[2];
         srcMainManager.Play();
-
-        while (time < 0.05f)
+        destroyToasts();
+        
+        while (time < 0.08f)
         {
             toastViewCamera.transform.position = Vector3.Lerp(toastViewCamera.transform.position, closeUpCameraInitialPosition, _curve.Evaluate(time));
             toastViewCamera.transform.rotation = Quaternion.Lerp(toastViewCamera.transform.rotation, Quaternion.Euler(closeUpCameraInitialRotation), _curve.Evaluate(time));
@@ -305,6 +311,7 @@ public class MainManager : MonoBehaviour
             time += Time.deltaTime * lerpSpeed;
             yield return null;
         }
+
         closeUpCamera.transform.position = closeUpCameraInitialPosition;
         closeUpCamera.transform.rotation = Quaternion.Euler(closeUpCameraInitialRotation);
 
@@ -313,9 +320,8 @@ public class MainManager : MonoBehaviour
 
         toastViewCamera.gameObject.SetActive(false);
         closeUpCamera.gameObject.SetActive(true);
-        
-        
 
+        hasSpawned = false;
     }
 
     IEnumerator loadMenu()
@@ -325,5 +331,19 @@ public class MainManager : MonoBehaviour
         src.clip = reflectorSounds[3];
         lights[3].gameObject.SetActive(true);
         src.Play();
+    }
+
+    void destroyToasts() 
+    {
+        foreach (GameObject toastInstances in GameObject.FindGameObjectsWithTag("Toast")) 
+        {
+            Destroy(toastInstances);
+        }
+    }
+
+    void getScriptForToaster() 
+    {
+        regularTosterScript = tosterType.GetComponent<Regular_Toster>();
+        zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
     }
 }

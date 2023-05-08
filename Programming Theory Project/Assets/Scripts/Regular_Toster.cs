@@ -8,19 +8,23 @@ public class Regular_Toster : MonoBehaviour
 
     public float toastTime;
     public GameObject toastedBread;
+    Color current;
     protected MainManager mainManager;
     protected zaciagnijZaciagnik zaciagnikScript;
     public AnimationCurve animationCurve;
-
     public List<GameObject> smallLights = new List<GameObject>();
+    Vector3 zaciagnikInitialPosition;
 
     private Vector3 endPosition = new Vector3(-0.04f, 2.26f, -8.53f);
 
     protected Vector3 offset = new Vector3(0, 1f, 0);
-    float m_Hue = 8, m_Saturation = 88, m_Value = 100;
+    float m_Hue = 8, m_Saturation = 88, m_Value = 100, m_value2 = 53;
     void Start()
     {
-      zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
+        zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
+
+        zaciagnikInitialPosition = GameObject.FindGameObjectWithTag("zaciagnik").transform.position;
     }
 
     // Update is called once per frame
@@ -36,61 +40,85 @@ public class Regular_Toster : MonoBehaviour
     //CORUTINES
     protected IEnumerator ToastBread()
     {
-        StartCoroutine(playSounds());
-        zaciagnikScript.zaciagnij();
-        float timeElapsed = 0;
-        GameObject _wskaz = GameObject.FindGameObjectWithTag("pivot");
-        lampSmallLights(0);
-        while (timeElapsed < toastTime)
+        if (mainManager.hasSpawned == false)
         {
-            _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0,0)), (timeElapsed / 45)/toastTime);
-            Debug.Log(timeElapsed);
-            timeElapsed += Time.deltaTime;
-            yield return null;
+            mainManager.hasSpawned = true;
+            StartCoroutine(playSounds());
+            zaciagnikScript.zaciagnij();
+            float timeElapsed = 0;
+            GameObject _wskaz = GameObject.FindGameObjectWithTag("pivot");
+            lampSmallLights(0, 0);
+            while (timeElapsed < toastTime)
+            {
+                _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0, 0)), (timeElapsed / 45) / toastTime);
+                Debug.Log(timeElapsed);
+                timeElapsed += Time.deltaTime;
+                yield return null;
+            }
+            zaciagnikScript.push();
+            Instantiate(toastedBread, transform.position, new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
+            StartCoroutine(jumpToasts(GameObject.Find("tostWypieczony(Clone)"), endPosition));
+            StartCoroutine(mainManager.lookAtToast());
+            mainManager.hasSpawned = true;
         }
-        zaciagnikScript.push();
-        Instantiate(toastedBread, transform.position, new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
-        StartCoroutine(jumpToasts(GameObject.Find("tostWypieczony(Clone)"), endPosition));
-        StartCoroutine(mainManager.lookAtToast());
+
     }
 
     protected IEnumerator playSounds()
     {
-        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
-       mainManager.src.clip = mainManager.reflectorSounds[1];
+        mainManager.src.clip = mainManager.reflectorSounds[1];
         mainManager.src.Play();
 
         yield return new WaitForSeconds(toastTime);
 
-       mainManager.src.clip = mainManager.reflectorSounds[2];
+        mainManager.src.clip = mainManager.reflectorSounds[2];
         mainManager.src.Play();
     }
-    
+
 
     protected IEnumerator jumpToasts(GameObject toastType, Vector3 endPos)
     {
+
         float lerpSpeed = 0.1f;
         float time = 0;
-        while (time < 1)
+        while (time < 0.1f)
         {
-          toastType.transform.position = Vector3.Lerp(toastType.transform.position, endPos, animationCurve.Evaluate(time));
+            toastType.transform.position = Vector3.Lerp(toastType.transform.position, endPos, animationCurve.Evaluate(time));
 
-          time += Time.deltaTime * lerpSpeed;
-          yield return null;
+            time += Time.deltaTime * lerpSpeed;
+            yield return null;
         }
+
+
     }
 
-    protected void lampSmallLights(int number) 
+    public void lampSmallLights(int number, int option)
     {
-
-        if (GameObject.Find("UltimateToster(Clone)") != null) 
+        if (option == 0)
         {
-            foreach (GameObject smalLight in GameObject.FindGameObjectsWithTag("smallLight"))
+            if (GameObject.Find("UltimateToster(Clone)") != null)
             {
-                smallLights.Add(smalLight);
+                foreach (GameObject smalLight in GameObject.FindGameObjectsWithTag("smallLight"))
+                {
+                    smallLights.Add(smalLight);
+                }
+                smallLights[number].GetComponent<Renderer>().material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_Value / 100);
             }
-          smallLights[number].GetComponent<Renderer>().material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_Value/100);
         }
+        else
+        {
+            for (int i = 0; i < smallLights.Count; i++)
+            {
+                smallLights[i].GetComponent<Renderer>().material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_value2 / 100);
+            }
+
+        }
+
+    }
+
+    public void resetZaciagnik () 
+    {
+        GameObject.FindGameObjectWithTag("zaciagnik").transform.position = zaciagnikInitialPosition;
     }
 }
 

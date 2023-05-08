@@ -291,6 +291,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  hasSpawned: 0
   mainCamera: {fileID: 7656046951896367761}
   sideCamera: {fileID: 837620743}
   closeUpCamera: {fileID: 974067481}
@@ -337,6 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50280ab4bb203204eb86911b612e3829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zaciagnikInitial: {x: 0, y: 0, z: 0}
 --- !u!82 &35789982
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1972,6 +1974,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50280ab4bb203204eb86911b612e3829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  zaciagnikInitial: {x: 0, y: 0, z: 0}
 --- !u!1 &1149241733
 GameObject:
   m_ObjectHideFlags: 0
