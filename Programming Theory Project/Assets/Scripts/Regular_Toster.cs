@@ -6,9 +6,8 @@ public class Regular_Toster : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public float toastTime;
+    [SerializeField] protected float toastTime;
     public GameObject toastedBread;
-    Color current;
     protected MainManager mainManager;
     protected zaciagnijZaciagnik zaciagnikScript;
     public AnimationCurve animationCurve;
@@ -21,10 +20,7 @@ public class Regular_Toster : MonoBehaviour
     float m_Hue = 8, m_Saturation = 88, m_Value = 100, m_value2 = 53;
     void Start()
     {
-        zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
-        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
-
-        zaciagnikInitialPosition = GameObject.FindGameObjectWithTag("zaciagnik").transform.position;
+        getInitialScripts();
     }
 
     // Update is called once per frame
@@ -116,9 +112,11 @@ public class Regular_Toster : MonoBehaviour
 
     }
 
-    public void resetZaciagnik () 
+    protected void getInitialScripts()
     {
-        GameObject.FindGameObjectWithTag("zaciagnik").transform.position = zaciagnikInitialPosition;
+        zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
+        mainManager = GameObject.Find("MainManager").GetComponent<MainManager>();
     }
+
 }
 
