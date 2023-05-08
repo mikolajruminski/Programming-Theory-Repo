@@ -249,6 +249,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Spawnplace: {fileID: 228205498}
+  Canvas: {fileID: 1021631165}
+  menuScreen: {fileID: 82865815}
   buttons:
   - {fileID: 1272562745}
   - {fileID: 2088354833}
@@ -262,10 +264,7 @@ MonoBehaviour:
   - {fileID: 298523379}
   - {fileID: 1634738308}
   - {fileID: 4120430110741195693}
-  Canvas: {fileID: 1021631165}
-  menuScreen: {fileID: 82865815}
   speed: 130
-  velocity: {x: 0, y: 0, z: 0}
   isSideCameraActive: 0
   _curve:
     serializedVersion: 2
@@ -311,6 +310,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 924b0d33597818543af6c5ca2bc01ae7, type: 3}
   - {fileID: 8300000, guid: ba1c48930d211e14f8de4766582555a5, type: 3}
   - {fileID: 8300000, guid: 9a23a7ea1fe349a42b26dbc3672f4cde, type: 3}
+  velocity: {x: 0, y: 0, z: 0}
 --- !u!4 &35789980
 Transform:
   m_ObjectHideFlags: 0
@@ -338,7 +338,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50280ab4bb203204eb86911b612e3829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zaciagnikInitial: {x: 0, y: 0, z: 0}
 --- !u!82 &35789982
 AudioSource:
   m_ObjectHideFlags: 0
@@ -483,7 +482,7 @@ GameObject:
   - component: {fileID: 108479974}
   - component: {fileID: 108479973}
   m_Layer: 5
-  m_Name: Button (2)
+  m_Name: ButtonGrilled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1974,7 +1973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50280ab4bb203204eb86911b612e3829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zaciagnikInitial: {x: 0, y: 0, z: 0}
 --- !u!1 &1149241733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2258,7 +2256,7 @@ GameObject:
   - component: {fileID: 1272562748}
   - component: {fileID: 1272562747}
   m_Layer: 5
-  m_Name: Button
+  m_Name: ButtonToast
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2989,7 +2987,7 @@ GameObject:
   - component: {fileID: 2088354836}
   - component: {fileID: 2088354835}
   m_Layer: 5
-  m_Name: Button (1)
+  m_Name: ButtonBagel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

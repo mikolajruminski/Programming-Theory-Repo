@@ -4,22 +4,8 @@ using UnityEngine;
 
 public class zaciagnijZaciagnik : MonoBehaviour
 {
-    // Start is called before the first frame update
-    private GameObject zaciagnik;
-    private Vector3 amountofZaciagniecie = new Vector3(0, 0.028f, 0);
-    public Vector3 zaciagnikInitial;
-    
-    void Start()
-    {
-       
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
+    GameObject zaciagnik;
+    Vector3 amountofZaciagniecie = new Vector3(0, 0.028f, 0);
     public void zaciagnij()
     {
         StartCoroutine(zaciagnijZaciagnikScript(amountofZaciagniecie, 5, 0.6f));
@@ -27,7 +13,7 @@ public class zaciagnijZaciagnik : MonoBehaviour
 
     public void push()
     {
-        StartCoroutine(zaciagnijZaciagnikScript((-amountofZaciagniecie / 3), 0.05f, 0.18f));
+        StartCoroutine(zaciagnijZaciagnikScript((-amountofZaciagniecie / 3), 0.05f, 0.20f));
     }
 
     public IEnumerator zaciagnijZaciagnikScript(Vector3 distance, float time2, float duration)
@@ -39,16 +25,9 @@ public class zaciagnijZaciagnik : MonoBehaviour
         while (time < duration)
         {
             zaciagnik.transform.position = Vector3.Lerp(zaciagnik.transform.position, zaciagnik.transform.position - distance, (time / time2) / duration);
+            
             time += Time.deltaTime;
             yield return null;
         }
     }
-
-    public void resetZaciagnik () 
-    {
-       zaciagnik = GameObject.FindGameObjectWithTag("zaciagnik");
-       zaciagnik.transform.position = new Vector3(-0.00980999973f,0,0.00603999989f);
-    }
-
-    
 }

@@ -4,16 +4,11 @@ using UnityEngine;
 
 public class mouseHoverOver : MonoBehaviour
 {
-    private Renderer rendere;
-    // Start is called before the first frame update
-    private Color existingColor;
-    private MainManager mainManager;
-
-    [SerializeField] float m_Hue;
-    [SerializeField] float m_Saturation;
-    [SerializeField] float m_Value;
-
-    private Vector3 offset = new Vector3(0.005f, 0, 0);
+    Renderer rendere;
+    Color existingColor;
+    MainManager mainManager;
+    [SerializeField] float m_Hue, m_Saturation, m_Value;
+    Vector3 offset = new Vector3(0.005f, 0, 0);
 
     void Start()
     {
@@ -26,16 +21,21 @@ public class mouseHoverOver : MonoBehaviour
     {
         if (mainManager.isInPlace)
         {
-            rendere.material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_Value / 100);
+            ChangeColor();
         }
         else if (mainManager.closeUpCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
         {
-            rendere.material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_Value / 100);
+            ChangeColor();
         }
     }
     private void OnMouseExit()
     {
         rendere.material.color = existingColor;
+    }
+
+    void ChangeColor()
+    {
+        rendere.material.color = Color.HSVToRGB(m_Hue / 360, m_Saturation / 100, m_Value / 100);
     }
 
     private void OnMouseDown()

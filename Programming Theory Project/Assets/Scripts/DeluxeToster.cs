@@ -18,35 +18,9 @@ public class DeluxeToster : Regular_Toster
 
     }
 
-    protected IEnumerator ToastBagel()
-    {
-        if (mainManager.hasSpawned == false)
-        {
-            mainManager.hasSpawned = true;
-            StartCoroutine(playSounds());
-            float timeElapsed = 0;
-            lampSmallLights(1, 0);
-            GameObject _wskaz = GameObject.FindGameObjectWithTag("pivot");
-            zaciagnikScript.zaciagnij();
-            while (timeElapsed < toastTime)
-            {
-                _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0, 0)), (timeElapsed / 45) / toastTime);
-                Debug.Log(timeElapsed);
-                timeElapsed += Time.deltaTime;
-                yield return null;
-            }
-            zaciagnikScript.push();
-            Instantiate(toastedBagel, transform.position, gameObject.transform.rotation);
-            StartCoroutine(jumpToasts(GameObject.Find("bagel wypieczony(Clone)"), new Vector3(-0.00700000022f, 2.25999999f, -8.28999996f)));
-            StartCoroutine(mainManager.lookAtToast());
-
-        }
-
-    }
-
     public void startToastingBagel()
     {
-        StartCoroutine(ToastBagel());
+        StartCoroutine(Toast(1, toastedBagel, gameObject.transform.rotation, "bagel wypieczony(Clone)", new Vector3(-0.00700000022f, 2.25999999f, -8.28999996f) ));
     }
 
 }

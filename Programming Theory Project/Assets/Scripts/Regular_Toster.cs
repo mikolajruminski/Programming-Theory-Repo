@@ -7,17 +7,16 @@ public class Regular_Toster : MonoBehaviour
     // Start is called before the first frame update
 
     [SerializeField] protected float toastTime;
-    public GameObject toastedBread;
+    [SerializeField] GameObject toastedBread;
     protected MainManager mainManager;
     protected zaciagnijZaciagnik zaciagnikScript;
-    public AnimationCurve animationCurve;
-    public List<GameObject> smallLights = new List<GameObject>();
-    Vector3 zaciagnikInitialPosition;
+    [SerializeField] AnimationCurve animationCurve;
+    List<GameObject> smallLights = new List<GameObject>();
 
-    private Vector3 endPosition = new Vector3(-0.04f, 2.26f, -8.53f);
-
-    protected Vector3 offset = new Vector3(0, 1f, 0);
+    //Vectors
+    Vector3 endPosition = new Vector3(-0.04f, 2.26f, -8.53f);
     float m_Hue = 8, m_Saturation = 88, m_Value = 100, m_value2 = 53;
+    
     void Start()
     {
         getInitialScripts();
@@ -30,11 +29,11 @@ public class Regular_Toster : MonoBehaviour
     }
     public void startToasting()
     {
-        StartCoroutine(ToastBread());
+        StartCoroutine(Toast(0, toastedBread, new Quaternion(-0.707106829f, 0, 0, 0.707106829f), "tostWypieczony(Clone)",  endPosition));
     }
 
     //CORUTINES
-    protected IEnumerator ToastBread()
+    protected IEnumerator Toast(int lightNumber, GameObject toastType, Quaternion rotation, string toastCloneName, Vector3 jumpPosition)
     {
         if (mainManager.hasSpawned == false)
         {
@@ -43,7 +42,7 @@ public class Regular_Toster : MonoBehaviour
             zaciagnikScript.zaciagnij();
             float timeElapsed = 0;
             GameObject _wskaz = GameObject.FindGameObjectWithTag("pivot");
-            lampSmallLights(0, 0);
+            lampSmallLights(lightNumber, 0);
             while (timeElapsed < toastTime)
             {
                 _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0, 0)), (timeElapsed / 45) / toastTime);
@@ -52,8 +51,8 @@ public class Regular_Toster : MonoBehaviour
                 yield return null;
             }
             zaciagnikScript.push();
-            Instantiate(toastedBread, transform.position, new Quaternion(-0.707106829f, 0, 0, 0.707106829f));
-            StartCoroutine(jumpToasts(GameObject.Find("tostWypieczony(Clone)"), endPosition));
+            Instantiate(toastType, transform.position, rotation);
+            StartCoroutine(jumpToasts(GameObject.Find(toastCloneName), jumpPosition));
             StartCoroutine(mainManager.lookAtToast());
             mainManager.hasSpawned = true;
         }

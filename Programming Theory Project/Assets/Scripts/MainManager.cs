@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class MainManager : MonoBehaviour
 {
-    // Start is called before the first frame update
+    //GameObjects
     private GameObject tosterType;
     public GameObject Spawnplace;
+    [SerializeField] GameObject Canvas;
+    [SerializeField] GameObject menuScreen;
+    private GameObject findInitialToster;
     [SerializeField] List<GameObject> buttons = new List<GameObject>();
     [SerializeField] List<GameObject> toasters = new List<GameObject>();
+    [SerializeField] List<GameObject> lights = new List<GameObject>();
 
-    public List<GameObject> lights = new List<GameObject>();
-    [SerializeField] GameObject Canvas;
-
-    public GameObject menuScreen;
+    //Scripts
     Regular_Toster regularTosterScript;
     zaciagnijZaciagnik zaciagnikScript;
-    private GameObject findInitialToster;
+    DeluxeToster deluxeTosterScript;
+    UberToster uberTosterScript;
+    mouseHoverOver mouseHoverOverScript;
+
+    //Variables
     bool isTosterPicked = false;
     public float speed = 1;
-    public Vector3 velocity = Vector3.zero;
     public bool isSideCameraActive = false;
     [SerializeField] private AnimationCurve _curve;
 
@@ -28,19 +32,18 @@ public class MainManager : MonoBehaviour
     //cameras
 
     public Camera mainCamera, sideCamera, closeUpCamera, toastViewCamera;
-    //
     public bool isInPlace = false;
     public bool isCameraCloseUp = false;
 
-    private mouseHoverOver mouseHoverOverScript;
     // sound effects
-
     public AudioSource src;
     public AudioSource srcMainManager;
     [SerializeField] public List<AudioClip> reflectorSounds = new List<AudioClip>();
     [SerializeField] List<AudioClip> swooshSounds = new List<AudioClip>();
 
     //Last lerping, 3 positions + rotation
+
+    [SerializeField] Vector3 velocity = Vector3.zero;
     Vector3 rotPos1 = new Vector3(-19f, -269.81f, 0f);
     Vector3 rotPos2 = new Vector3(0, -180, 0);
     Vector3 pos1 = new Vector3(-2.073f, 1.53f, -7.375f);
@@ -56,12 +59,6 @@ public class MainManager : MonoBehaviour
         toastViewCameraInitialRotation = toastViewCamera.transform.rotation;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     public void ToastBread()
     {
         tosterType = GameObject.FindGameObjectWithTag("Toaster");
@@ -74,7 +71,6 @@ public class MainManager : MonoBehaviour
 
     public void ToastBagel()
     {
-        DeluxeToster deluxeTosterScript;
         deluxeTosterScript = GameObject.FindGameObjectWithTag("Toaster").GetComponent<DeluxeToster>();
         if (deluxeTosterScript != null)
         {
@@ -84,7 +80,6 @@ public class MainManager : MonoBehaviour
 
     public void ToastGrilledCheese()
     {
-        UberToster uberTosterScript;
         uberTosterScript = GameObject.FindGameObjectWithTag("Toaster").GetComponent<UberToster>();
         if (uberTosterScript != null)
         {
@@ -105,17 +100,21 @@ public class MainManager : MonoBehaviour
             }
             else if (findInitialToster.name == "deluxeToaster(Clone)")
             {
-                buttons[0].SetActive(true);
-                buttons[1].SetActive(true);
+                for (int i = 0; i < buttons.Count - 1; i++)
+                {
+                    buttons[i].SetActive(true);
+                }
+
                 buttons[0].transform.localPosition = new Vector3(-124.400002f, -104.599998f, 32);
                 buttons[1].transform.localPosition = new Vector3(-124, -140.300003f, 32);
 
             }
             else if (findInitialToster.name == "UltimateToster(Clone)")
             {
-                buttons[0].SetActive(true);
-                buttons[1].SetActive(true);
-                buttons[2].SetActive(true);
+                for (int i = 0; i < buttons.Count; i++)
+                {
+                    buttons[i].SetActive(true);
+                }
             }
         }
     }
@@ -256,7 +255,7 @@ public class MainManager : MonoBehaviour
         }
         closeUpCamera.transform.position = toastViewCameraInitialPosition;
         closeUpCamera.transform.rotation = toastViewCameraInitialRotation;
-        
+
         closeUpCamera.gameObject.SetActive(false);
         toastViewCamera.gameObject.SetActive(true);
         toastViewCamera.transform.position = toastViewCameraInitialPosition;
@@ -302,7 +301,7 @@ public class MainManager : MonoBehaviour
         srcMainManager.clip = swooshSounds[2];
         srcMainManager.Play();
         destroyToasts();
-        
+
         while (time < 0.08f)
         {
             toastViewCamera.transform.position = Vector3.Lerp(toastViewCamera.transform.position, closeUpCameraInitialPosition, _curve.Evaluate(time));
@@ -333,16 +332,17 @@ public class MainManager : MonoBehaviour
         src.Play();
     }
 
-    void destroyToasts() 
+    void destroyToasts()
     {
-        foreach (GameObject toastInstances in GameObject.FindGameObjectsWithTag("Toast")) 
+        foreach (GameObject toastInstances in GameObject.FindGameObjectsWithTag("Toast"))
         {
             Destroy(toastInstances);
         }
     }
 
-    void getScriptForToaster() 
+    void getScriptForToaster()
     {
+        tosterType = GameObject.FindGameObjectWithTag("Toaster");
         regularTosterScript = tosterType.GetComponent<Regular_Toster>();
         zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
     }
