@@ -264,7 +264,7 @@ MonoBehaviour:
   - {fileID: 298523379}
   - {fileID: 1634738308}
   - {fileID: 4120430110741195693}
-  speed: 130
+  speed: 90
   isSideCameraActive: 0
   _curve:
     serializedVersion: 2

@@ -23,7 +23,8 @@ public class MainManager : MonoBehaviour
 
     //Variables
     bool isTosterPicked = false;
-    public float speed = 1;
+    public float speed = 1f;
+    float speed2 = 130;
     public bool isSideCameraActive = false;
     [SerializeField] private AnimationCurve _curve;
 
@@ -50,11 +51,11 @@ public class MainManager : MonoBehaviour
     Vector3 pos2 = new Vector3(-0.03f, 1.53f, -6.913f);
 
     //Camera initial positions
-    Vector3 closeUpCameraInitialPosition = new Vector3(-2.07299995f, 1.52999997f, -8.51399994f);
-    Vector3 closeUpCameraInitialRotation = new Vector3(0, -269.891f, 0);
+    //Vector3 closeUpCameraInitialPosition = new Vector3(-2.07299995f, 1.52999997f, -8.51399994f);
+    //Vector3 closeUpCameraInitialRotation = new Vector3(0, -269.891f, 0);
 
-    Vector3 mainCameraInitialPosition, toastViewCameraInitialPosition, sideCameraInitialPosition;
-    Quaternion mainCameraInitialRotation, toastViewCameraInitialRotation, sideCameraInitialRotation;
+    Vector3 mainCameraInitialPosition, toastViewCameraInitialPosition, sideCameraInitialPosition, closeUpCameraInitialPosition;
+    Quaternion mainCameraInitialRotation, toastViewCameraInitialRotation, sideCameraInitialRotation, closeUpCameraInitialRotation;
 
 
 
@@ -70,6 +71,10 @@ public class MainManager : MonoBehaviour
         if (sideCamera.gameObject != null && Input.GetKey(KeyCode.L) && isInPlace)
         {
             StartCoroutine(fadeOutCamera());
+        }
+        else if (closeUpCamera.gameObject != null && Input.GetKey(KeyCode.N) && isSideCameraActive) 
+        {
+            StartCoroutine(CloseUpToSide());
         }
     }
 
@@ -101,9 +106,9 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    void SpawnButtons()
+    void SpawnButtons(int number)
     {
-        if (isTosterPicked)
+        if (isTosterPicked && number == 0)
         {
             findInitialToster = GameObject.FindGameObjectWithTag("Toaster");
             if (findInitialToster.name == "RegularToster(Clone)")
@@ -130,6 +135,13 @@ public class MainManager : MonoBehaviour
                     buttons[i].SetActive(true);
                 }
             }
+        }
+        else
+        {
+          for (int i = 0; i < buttons.Count; i++)
+                {
+                    buttons[i].SetActive(false);
+                }
         }
     }
 
@@ -164,7 +176,7 @@ public class MainManager : MonoBehaviour
         while (time < 3.5f)
         {
             mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, sideCameraInitialPosition,
-            ref velocity, speed * Time.deltaTime);
+            ref velocity, speed2 * Time.deltaTime);
             mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, sideCameraInitialRotation, time / 12);
 
             time += Time.deltaTime;
@@ -194,23 +206,52 @@ public class MainManager : MonoBehaviour
 
         float time = 0;
         isInPlace = false;
-        while (time < 4f)
+        while (time < 3.5f)
         {
-            sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, closeUpCamera.transform.position,
+            sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, closeUpCameraInitialPosition,
             ref velocity, speed * Time.deltaTime);
-            sideCamera.transform.rotation = Quaternion.Lerp(sideCamera.transform.rotation, closeUpCamera.transform.rotation, time / 36);
+            sideCamera.transform.rotation = Quaternion.Lerp(sideCamera.transform.rotation, closeUpCameraInitialRotation, time / 48);
 
             time += Time.deltaTime;
             yield return null;
 
         }
 
-        sideCamera.transform.position = closeUpCamera.transform.position;
-        sideCamera.transform.rotation = closeUpCamera.transform.rotation;
+        sideCamera.transform.position = closeUpCameraInitialPosition;
+        closeUpCamera.transform.position = closeUpCameraInitialPosition;
+        closeUpCamera.transform.rotation = closeUpCameraInitialRotation;
+        sideCamera.transform.rotation = closeUpCameraInitialRotation;
         sideCamera.gameObject.SetActive(false);
         closeUpCamera.gameObject.SetActive(true);
         isSideCameraActive = true;
-        SpawnButtons();
+        SpawnButtons(0);
+    }
+
+    public IEnumerator CloseUpToSide()
+    {
+        isSideCameraActive = false;
+        SpawnButtons(1);
+        float time = 0;
+        while (time < 3.2f)
+        {
+            closeUpCamera.transform.position = Vector3.SmoothDamp(closeUpCamera.transform.position, sideCameraInitialPosition,
+            ref velocity, speed * Time.deltaTime);
+            closeUpCamera.transform.rotation = Quaternion.Lerp(closeUpCamera.transform.rotation, sideCameraInitialRotation, time / 16);
+
+            time += Time.deltaTime;
+            yield return null;
+
+        }
+
+        closeUpCamera.transform.position = sideCameraInitialPosition;
+        sideCamera.transform.position = sideCameraInitialPosition;
+        closeUpCamera.transform.rotation = sideCameraInitialRotation;
+        sideCamera.transform.rotation = sideCameraInitialRotation;
+
+        sideCamera.gameObject.SetActive(true);
+        closeUpCamera.gameObject.SetActive(false);
+
+        isInPlace = true;
     }
 
     IEnumerator fadeOutCamera()
@@ -221,8 +262,8 @@ public class MainManager : MonoBehaviour
         while (time < 3.5f)
         {
             sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, mainCameraInitialPosition,
-            ref velocity, speed * Time.deltaTime);
-            sideCamera.transform.rotation = Quaternion.Lerp(sideCamera.transform.rotation, mainCameraInitialRotation, time / 12);
+            ref velocity, speed2 * Time.deltaTime);
+            sideCamera.transform.rotation = Quaternion.Lerp(sideCamera.transform.rotation, mainCameraInitialRotation, time / 36);
 
             time += Time.deltaTime;
             yield return null;
@@ -359,14 +400,14 @@ public class MainManager : MonoBehaviour
         while (time < 0.08f)
         {
             toastViewCamera.transform.position = Vector3.Lerp(toastViewCamera.transform.position, closeUpCameraInitialPosition, _curve.Evaluate(time));
-            toastViewCamera.transform.rotation = Quaternion.Lerp(toastViewCamera.transform.rotation, Quaternion.Euler(closeUpCameraInitialRotation), _curve.Evaluate(time));
+            toastViewCamera.transform.rotation = Quaternion.Lerp(toastViewCamera.transform.rotation, closeUpCameraInitialRotation, _curve.Evaluate(time));
 
             time += Time.deltaTime * lerpSpeed;
             yield return null;
         }
 
         closeUpCamera.transform.position = closeUpCameraInitialPosition;
-        closeUpCamera.transform.rotation = Quaternion.Euler(closeUpCameraInitialRotation);
+        closeUpCamera.transform.rotation = closeUpCameraInitialRotation;
 
         isSideCameraActive = true;
         isCameraCloseUp = false;
@@ -421,6 +462,8 @@ public class MainManager : MonoBehaviour
         mainCameraInitialRotation = mainCamera.transform.rotation;
         sideCameraInitialPosition = sideCamera.transform.position;
         sideCameraInitialRotation = sideCamera.transform.rotation;
+        closeUpCameraInitialPosition = closeUpCamera.transform.position;
+        closeUpCameraInitialRotation = closeUpCamera.transform.rotation;
 
     }
 }
