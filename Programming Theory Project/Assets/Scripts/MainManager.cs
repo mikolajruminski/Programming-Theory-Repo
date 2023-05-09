@@ -48,15 +48,29 @@ public class MainManager : MonoBehaviour
     Vector3 rotPos2 = new Vector3(0, -180, 0);
     Vector3 pos1 = new Vector3(-2.073f, 1.53f, -7.375f);
     Vector3 pos2 = new Vector3(-0.03f, 1.53f, -6.913f);
-    Vector3 toastViewCameraInitialPosition;
-    Quaternion toastViewCameraInitialRotation;
+
+    //Camera initial positions
     Vector3 closeUpCameraInitialPosition = new Vector3(-2.07299995f, 1.52999997f, -8.51399994f);
     Vector3 closeUpCameraInitialRotation = new Vector3(0, -269.891f, 0);
+
+    Vector3 mainCameraInitialPosition, toastViewCameraInitialPosition, sideCameraInitialPosition;
+    Quaternion mainCameraInitialRotation, toastViewCameraInitialRotation, sideCameraInitialRotation;
+
+
+
     void Start()
     {
         StartCoroutine(loadMenu());
-        toastViewCameraInitialPosition = toastViewCamera.transform.position;
-        toastViewCameraInitialRotation = toastViewCamera.transform.rotation;
+        getInitialCameraTransforms();
+
+    }
+
+    void LateUpdate()
+    {
+        if (sideCamera.gameObject != null && Input.GetKey(KeyCode.L) && isInPlace)
+        {
+            StartCoroutine(fadeOutCamera());
+        }
     }
 
     public void ToastBread()
@@ -123,6 +137,7 @@ public class MainManager : MonoBehaviour
     {
         if (number == 0)
         {
+            destroyObjects(1);
             Instantiate(toasters[number], position, transform.rotation * Quaternion.Euler(0f, -90f, 0f));
             isTosterPicked = true;
             menuScreen.gameObject.SetActive(false);
@@ -130,6 +145,7 @@ public class MainManager : MonoBehaviour
         }
         else
         {
+            destroyObjects(1);
             Instantiate(toasters[number], position, Quaternion.identity);
             isTosterPicked = true;
             menuScreen.gameObject.SetActive(false);
@@ -142,20 +158,23 @@ public class MainManager : MonoBehaviour
     //COROUTINES
     IEnumerator fadeCamera()
     {
+
         float time = 0;
 
         while (time < 3.5f)
         {
-            mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, sideCamera.transform.position,
+            mainCamera.transform.position = Vector3.SmoothDamp(mainCamera.transform.position, sideCameraInitialPosition,
             ref velocity, speed * Time.deltaTime);
-            mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, sideCamera.transform.rotation, time / 12);
+            mainCamera.transform.rotation = Quaternion.Lerp(mainCamera.transform.rotation, sideCameraInitialRotation, time / 12);
 
             time += Time.deltaTime;
             yield return null;
 
         }
-        mainCamera.transform.position = sideCamera.transform.position;
-        mainCamera.transform.rotation = sideCamera.transform.rotation;
+        mainCamera.transform.position = sideCameraInitialPosition;
+        sideCamera.transform.position = sideCameraInitialPosition;
+        sideCamera.transform.rotation = sideCameraInitialRotation;
+        mainCamera.transform.rotation = sideCameraInitialRotation;
 
         mainCamera.gameObject.SetActive(false);
         sideCamera.gameObject.SetActive(true);
@@ -192,6 +211,41 @@ public class MainManager : MonoBehaviour
         closeUpCamera.gameObject.SetActive(true);
         isSideCameraActive = true;
         SpawnButtons();
+    }
+
+    IEnumerator fadeOutCamera()
+    {
+        float time = 0;
+        isInPlace = false;
+
+        while (time < 3.5f)
+        {
+            sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, mainCameraInitialPosition,
+            ref velocity, speed * Time.deltaTime);
+            sideCamera.transform.rotation = Quaternion.Lerp(sideCamera.transform.rotation, mainCameraInitialRotation, time / 12);
+
+            time += Time.deltaTime;
+            yield return null;
+
+        }
+        sideCamera.transform.position = mainCameraInitialPosition;
+        sideCamera.transform.rotation = mainCameraInitialRotation;
+        mainCamera.transform.position = mainCameraInitialPosition;
+        mainCamera.transform.rotation = mainCameraInitialRotation;
+
+        mainCamera.gameObject.SetActive(true);
+        sideCamera.gameObject.SetActive(false);
+
+        lights[0].gameObject.SetActive(false);
+        lights[1].gameObject.SetActive(false);
+        src.clip = reflectorSounds[0];
+        src.Play();
+        yield return new WaitForSeconds(1);
+        lights[2].gameObject.SetActive(false);
+        src.Play();
+        Canvas.gameObject.SetActive(true);
+        menuScreen.gameObject.SetActive(true);
+
     }
 
     public IEnumerator lookAtToast()
@@ -300,7 +354,7 @@ public class MainManager : MonoBehaviour
 
         srcMainManager.clip = swooshSounds[2];
         srcMainManager.Play();
-        destroyToasts();
+        destroyObjects(0);
 
         while (time < 0.08f)
         {
@@ -332,12 +386,24 @@ public class MainManager : MonoBehaviour
         src.Play();
     }
 
-    void destroyToasts()
+    void destroyObjects(int number)
     {
-        foreach (GameObject toastInstances in GameObject.FindGameObjectsWithTag("Toast"))
+        switch (number)
         {
-            Destroy(toastInstances);
+            case 0:
+                foreach (GameObject toastInstances in GameObject.FindGameObjectsWithTag("Toast"))
+                {
+                    Destroy(toastInstances);
+                }
+                break;
+            case 1:
+                foreach (GameObject toasterInstances in GameObject.FindGameObjectsWithTag("Toaster"))
+                {
+                    Destroy(toasterInstances);
+                }
+                break;
         }
+
     }
 
     void getScriptForToaster()
@@ -345,5 +411,16 @@ public class MainManager : MonoBehaviour
         tosterType = GameObject.FindGameObjectWithTag("Toaster");
         regularTosterScript = tosterType.GetComponent<Regular_Toster>();
         zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
+    }
+
+    void getInitialCameraTransforms()
+    {
+        toastViewCameraInitialPosition = toastViewCamera.transform.position;
+        toastViewCameraInitialRotation = toastViewCamera.transform.rotation;
+        mainCameraInitialPosition = mainCamera.transform.position;
+        mainCameraInitialRotation = mainCamera.transform.rotation;
+        sideCameraInitialPosition = sideCamera.transform.position;
+        sideCameraInitialRotation = sideCamera.transform.rotation;
+
     }
 }
