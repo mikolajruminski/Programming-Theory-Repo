@@ -5,7 +5,7 @@ using UnityEngine;
 public class zaciagnijZaciagnik : MonoBehaviour
 {
     GameObject zaciagnik;
-    Vector3 amountofZaciagniecie = new Vector3(0, 0.028f, 0);
+    Vector3 amountofZaciagniecie = new Vector3(0, 0.027f, 0);
     public void zaciagnij()
     {
         StartCoroutine(zaciagnijZaciagnikScript(amountofZaciagniecie, 5, 0.6f));

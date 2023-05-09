@@ -248,7 +248,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fd31b6ba717394e98506d009bfb4da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Spawnplace: {fileID: 228205498}
   Canvas: {fileID: 1021631165}
   menuScreen: {fileID: 82865815}
   buttons:

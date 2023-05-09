@@ -39,7 +39,10 @@ public class Regular_Toster : MonoBehaviour
             lampSmallLights(lightNumber, 0);
             while (timeElapsed < toastTime)
             {
-                _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0, 0)), (timeElapsed / 45) / toastTime);
+                if (_wskaz != null)
+                {
+                    _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0, 0)), (timeElapsed / 45) / toastTime);
+                }
                 Debug.Log(timeElapsed);
                 timeElapsed += Time.deltaTime;
                 yield return null;

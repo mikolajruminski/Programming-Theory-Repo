@@ -19,6 +19,8 @@ public class MainManager : MonoBehaviour
     DeluxeToster deluxeTosterScript;
     UberToster uberTosterScript;
     //Variables
+    int currentToaster;
+    Vector3 currentToasterVector;
     bool isTosterPicked = false;
     [SerializeField] float speed = 1f;
     float speed2 = 130;
@@ -44,7 +46,7 @@ public class MainManager : MonoBehaviour
     Vector3 rotPos2 = new Vector3(0, -180, 0);
     Vector3 pos1 = new Vector3(-2.073f, 1.53f, -7.375f);
     Vector3 pos2 = new Vector3(-0.03f, 1.53f, -6.913f);
-    Vector3 mainCameraInitialPosition, toastViewCameraInitialPosition,  sideCameraInitialPosition, closeUpCameraInitialPosition;
+    Vector3 mainCameraInitialPosition, toastViewCameraInitialPosition, sideCameraInitialPosition, closeUpCameraInitialPosition;
     Quaternion mainCameraInitialRotation, toastViewCameraInitialRotation, sideCameraInitialRotation, closeUpCameraInitialRotation;
 
 
@@ -147,6 +149,8 @@ public class MainManager : MonoBehaviour
             isTosterPicked = true;
             menuScreen.gameObject.SetActive(false);
             StartCoroutine(fadeMainCamera(1));
+            currentToaster = number;
+            currentToasterVector = position;
         }
         else
         {
@@ -155,6 +159,8 @@ public class MainManager : MonoBehaviour
             isTosterPicked = true;
             menuScreen.gameObject.SetActive(false);
             StartCoroutine(fadeMainCamera(1));
+            currentToaster = number;
+            currentToasterVector = position;
         }
 
 
@@ -418,7 +424,8 @@ public class MainManager : MonoBehaviour
 
                 srcMainManager.clip = swooshSounds[2];
                 srcMainManager.Play();
-                destroyObjects(0);
+                
+                respawnToaster(currentToaster, currentToasterVector);
 
                 while (time < 0.08f)
                 {
@@ -455,6 +462,22 @@ public class MainManager : MonoBehaviour
         src.Play();
     }
 
+    void respawnToaster(int number, Vector3 position)
+    {
+        switch (number)
+        {
+            case 0:
+                destroyObjects(0);
+                destroyObjects(1);
+                Instantiate(toasters[number], position, transform.rotation * Quaternion.Euler(0f, -90f, 0f));
+                break;
+            default:
+                destroyObjects(0);
+                destroyObjects(1);
+                Instantiate(toasters[number], position, Quaternion.identity);
+                break;
+        }
+    }
     void destroyObjects(int number)
     {
         switch (number)
@@ -472,7 +495,6 @@ public class MainManager : MonoBehaviour
                 }
                 break;
         }
-
     }
 
     void getScriptForToaster()
