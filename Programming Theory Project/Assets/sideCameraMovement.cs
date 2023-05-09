@@ -36,7 +36,7 @@ public class sideCameraMovement : MonoBehaviour
     {
         if (mainManager.isCameraCloseUp && Input.GetKeyDown(KeyCode.K) && mainManager.toastViewCamera.gameObject != null)
         {
-            StartCoroutine(mainManager.lookAtToasterFromToastView());
+            StartCoroutine(mainManager.lookAtToast(2));
         }
     }
 }

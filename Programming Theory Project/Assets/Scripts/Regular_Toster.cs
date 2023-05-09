@@ -21,12 +21,6 @@ public class Regular_Toster : MonoBehaviour
     {
         getInitialScripts();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
     public void startToasting()
     {
         StartCoroutine(Toast(0, toastedBread, new Quaternion(-0.707106829f, 0, 0, 0.707106829f), "tostWypieczony(Clone)",  endPosition));
@@ -53,7 +47,7 @@ public class Regular_Toster : MonoBehaviour
             zaciagnikScript.push();
             Instantiate(toastType, transform.position, rotation);
             StartCoroutine(jumpToasts(GameObject.Find(toastCloneName), jumpPosition));
-            StartCoroutine(mainManager.lookAtToast());
+            StartCoroutine(mainManager.lookAtToast(1));
             mainManager.hasSpawned = true;
         }
 
