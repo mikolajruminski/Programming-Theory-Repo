@@ -22,14 +22,12 @@ public class sideCameraMovement : MonoBehaviour
 
     void RotateCamera()
     {
-        if (mainManager.sideCamera.gameObject != null && mainManager.isInPlace)
+        if (mainManager.sideCamera.gameObject != null && mainManager.isInPlace&& mainManager.isLerping == false)
         {
             GameObject.Find("spawnPlace").transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
 
-
-
         }
-        else if (mainManager.closeUpCamera.gameObject != null && mainManager.isCameraCloseUp)
+        else if (mainManager.closeUpCamera.gameObject != null && mainManager.isCameraCloseUp && mainManager.isLerping == false)
         {
             GameObject.Find("ToastPosition").transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
 
@@ -39,8 +37,9 @@ public class sideCameraMovement : MonoBehaviour
 
     void SwitchBackToSideCamera()
     {
-        if (mainManager.isCameraCloseUp && Input.GetKeyDown(KeyCode.L) && mainManager.toastViewCamera.gameObject != null)
+        if (mainManager.isCameraCloseUp && Input.GetKeyDown(KeyCode.L) && mainManager.toastViewCamera.gameObject != null && mainManager.isLerping == false)
         {
+            Debug.Log("LookAtToast");
             StartCoroutine(mainManager.lookAtToast(2));
         }
     }

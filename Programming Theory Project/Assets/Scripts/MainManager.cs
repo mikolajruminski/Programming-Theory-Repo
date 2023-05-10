@@ -32,7 +32,7 @@ public class MainManager : MonoBehaviour
     [SerializeField] private AnimationCurve curve;
     public bool hasSpawned = false;
 
-    bool isLerping = false;
+    public bool isLerping = false;
     //cameras
 
     public Camera mainCamera, sideCamera, closeUpCamera, toastViewCamera;
@@ -66,12 +66,14 @@ public class MainManager : MonoBehaviour
 
     void LateUpdate()
     {
-        if (sideCamera.gameObject != null && Input.GetKey(KeyCode.L) && isInPlace)
+        if (sideCamera.gameObject != null && Input.GetKey(KeyCode.L) && isInPlace && isLerping == false)
         {
+            Debug.Log("fadeMainCamera!");
             StartCoroutine(fadeMainCamera(2));
         }
-        else if (closeUpCamera.gameObject != null && Input.GetKey(KeyCode.L) && isSideCameraActive)
+        else if (closeUpCamera.gameObject != null && Input.GetKey(KeyCode.L) && isSideCameraActive && isLerping == false && hasSpawned == false)
         {
+            Debug.Log("SideToCloseUpCamera");
             StartCoroutine(SideToCloseupCamera(2));
         }
 
@@ -209,10 +211,9 @@ public class MainManager : MonoBehaviour
                 yield return new WaitForSeconds(1);
                 lights[2].gameObject.SetActive(true);
                 src.Play();
+                lerp();
 
                 isInPlace = true;
-                StartCoroutine(lerpButtons());
-
                 break;
 
             case 2:
@@ -259,9 +260,10 @@ public class MainManager : MonoBehaviour
         switch (number)
         {
             case 1:
-               StartCoroutine(deLerpButtons());
-                time = 0;
                 isInPlace = false;
+                StartCoroutine(deLerpButtons());
+                time = 0;
+
                 while (time < 3.5f)
                 {
                     sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, closeUpCameraInitialPosition,
@@ -285,7 +287,6 @@ public class MainManager : MonoBehaviour
                 break;
 
             case 2:
-
                 time = 0;
                 isSideCameraActive = false;
                 SpawnButtons(1);
@@ -307,10 +308,9 @@ public class MainManager : MonoBehaviour
 
                 sideCamera.gameObject.SetActive(true);
                 closeUpCamera.gameObject.SetActive(false);
-
-                isInPlace = true;
                 StartCoroutine(lerpButtons());
-
+                hasSpawned = false;
+                isInPlace = true;
                 break;
         }
 
@@ -394,7 +394,8 @@ public class MainManager : MonoBehaviour
                 break;
 
             case 2:
-
+                
+                isCameraCloseUp = false;
                 getScriptForToaster();
                 StartCoroutine(deLerpButtons());
                 regularTosterScript.lampSmallLights(0, 1);
@@ -447,7 +448,6 @@ public class MainManager : MonoBehaviour
                 closeUpCamera.transform.rotation = closeUpCameraInitialRotation;
 
                 isSideCameraActive = true;
-                isCameraCloseUp = false;
 
                 toastViewCamera.gameObject.SetActive(false);
                 closeUpCamera.gameObject.SetActive(true);
@@ -471,8 +471,8 @@ public class MainManager : MonoBehaviour
 
     IEnumerator lerpButtons()
     {
-        yield return new WaitForSeconds(1);
         isLerping = true;
+        yield return new WaitForSeconds(1);
         float x = 0f;
         float duration = 0.9f;
         while (x < duration)
@@ -482,6 +482,7 @@ public class MainManager : MonoBehaviour
             yield return null;
         }
         adCanvas.alpha = 1;
+        isLerping = false;
     }
 
     IEnumerator deLerpButtons()
@@ -496,8 +497,16 @@ public class MainManager : MonoBehaviour
             yield return null;
         }
         adCanvas.alpha = 0;
+        isLerping = false;
     }
 
+    void lerp()
+    {
+        if (isLerping == false)
+        {
+            StartCoroutine(lerpButtons());
+        }
+    }
     void respawnToaster(int number, Vector3 position)
     {
         switch (number)

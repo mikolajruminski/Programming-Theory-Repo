@@ -51,7 +51,6 @@ public class Regular_Toster : MonoBehaviour
             Instantiate(toastType, transform.position, rotation);
             StartCoroutine(jumpToasts(GameObject.Find(toastCloneName), jumpPosition));
             StartCoroutine(mainManager.lookAtToast(1));
-            mainManager.hasSpawned = true;
         }
 
     }

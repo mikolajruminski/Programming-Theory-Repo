@@ -40,7 +40,7 @@ public class mouseHoverOver : MonoBehaviour
 
     void OnMouseDown()
     {
-        if (mainManager.isInPlace)
+        if (mainManager.isInPlace && mainManager.isLerping == false)
         {
             StartCoroutine(mainManager.SideToCloseupCamera(1));
         }
@@ -63,7 +63,7 @@ public class mouseHoverOver : MonoBehaviour
     //IENUMERATORS
     IEnumerator pushButtons(Vector3 pushOffset)
     {
-        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
+        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive && mainManager.isLerping == false)
         {
             float time = 0;
 
