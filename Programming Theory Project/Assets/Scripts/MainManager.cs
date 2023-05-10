@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainManager : MonoBehaviour
 {
@@ -8,6 +9,8 @@ public class MainManager : MonoBehaviour
     GameObject tosterType;
     [SerializeField] GameObject Canvas;
     [SerializeField] GameObject menuScreen;
+    [SerializeField] public GameObject ADbuttons;
+    CanvasGroup adCanvas;
     GameObject findInitialToster;
     [SerializeField] List<GameObject> buttons = new List<GameObject>();
     [SerializeField] List<GameObject> toasters = new List<GameObject>();
@@ -26,7 +29,10 @@ public class MainManager : MonoBehaviour
     float speed2 = 130;
     public bool isSideCameraActive = false;
     [SerializeField] private AnimationCurve _curve;
+    [SerializeField] private AnimationCurve curve;
     public bool hasSpawned = false;
+
+    bool isLerping = false;
     //cameras
 
     public Camera mainCamera, sideCamera, closeUpCamera, toastViewCamera;
@@ -53,9 +59,9 @@ public class MainManager : MonoBehaviour
 
     void Start()
     {
+        adCanvas = ADbuttons.gameObject.GetComponent<CanvasGroup>();
         StartCoroutine(loadMenu());
         getInitialCameraTransforms();
-
     }
 
     void LateUpdate()
@@ -64,10 +70,11 @@ public class MainManager : MonoBehaviour
         {
             StartCoroutine(fadeMainCamera(2));
         }
-        else if (closeUpCamera.gameObject != null && Input.GetKey(KeyCode.N) && isSideCameraActive)
+        else if (closeUpCamera.gameObject != null && Input.GetKey(KeyCode.L) && isSideCameraActive)
         {
             StartCoroutine(SideToCloseupCamera(2));
         }
+
     }
 
     public void Toast(int number)
@@ -204,6 +211,7 @@ public class MainManager : MonoBehaviour
                 src.Play();
 
                 isInPlace = true;
+                StartCoroutine(lerpButtons());
 
                 break;
 
@@ -211,7 +219,7 @@ public class MainManager : MonoBehaviour
 
                 time = 0;
                 isInPlace = false;
-
+                StartCoroutine(deLerpButtons());
                 while (time < 3.5f)
                 {
                     sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, mainCameraInitialPosition,
@@ -239,13 +247,9 @@ public class MainManager : MonoBehaviour
                 src.Play();
                 Canvas.gameObject.SetActive(true);
                 menuScreen.gameObject.SetActive(true);
-
                 break;
 
         }
-
-
-
     }
 
     public IEnumerator SideToCloseupCamera(int number)
@@ -255,7 +259,7 @@ public class MainManager : MonoBehaviour
         switch (number)
         {
             case 1:
-
+               StartCoroutine(deLerpButtons());
                 time = 0;
                 isInPlace = false;
                 while (time < 3.5f)
@@ -305,6 +309,7 @@ public class MainManager : MonoBehaviour
                 closeUpCamera.gameObject.SetActive(false);
 
                 isInPlace = true;
+                StartCoroutine(lerpButtons());
 
                 break;
         }
@@ -384,12 +389,14 @@ public class MainManager : MonoBehaviour
                 toastViewCamera.transform.position = toastViewCameraInitialPosition;
                 toastViewCamera.transform.rotation = toastViewCameraInitialRotation;
                 isCameraCloseUp = true;
-
+                StartCoroutine(lerpButtons());
+                isSideCameraActive = false;
                 break;
 
             case 2:
 
                 getScriptForToaster();
+                StartCoroutine(deLerpButtons());
                 regularTosterScript.lampSmallLights(0, 1);
                 lerpSpeed = 0.2f;
                 time = 0;
@@ -424,7 +431,7 @@ public class MainManager : MonoBehaviour
 
                 srcMainManager.clip = swooshSounds[2];
                 srcMainManager.Play();
-                
+
                 respawnToaster(currentToaster, currentToasterVector);
 
                 while (time < 0.08f)
@@ -460,6 +467,35 @@ public class MainManager : MonoBehaviour
         src.clip = reflectorSounds[3];
         lights[3].gameObject.SetActive(true);
         src.Play();
+    }
+
+    IEnumerator lerpButtons()
+    {
+        yield return new WaitForSeconds(1);
+        isLerping = true;
+        float x = 0f;
+        float duration = 0.9f;
+        while (x < duration)
+        {
+            adCanvas.alpha = Mathf.Lerp(0, 1, x / duration);
+            x += Time.deltaTime;
+            yield return null;
+        }
+        adCanvas.alpha = 1;
+    }
+
+    IEnumerator deLerpButtons()
+    {
+        isLerping = true;
+        float x = 0f;
+        float duration = 0.9f;
+        while (x < duration)
+        {
+            adCanvas.alpha = Mathf.Lerp(1, 0, x / duration);
+            x += Time.deltaTime;
+            yield return null;
+        }
+        adCanvas.alpha = 0;
     }
 
     void respawnToaster(int number, Vector3 position)

@@ -25,18 +25,24 @@ public class sideCameraMovement : MonoBehaviour
         if (mainManager.sideCamera.gameObject != null && mainManager.isInPlace)
         {
             GameObject.Find("spawnPlace").transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
+
+
+
         }
         else if (mainManager.closeUpCamera.gameObject != null && mainManager.isCameraCloseUp)
         {
             GameObject.Find("ToastPosition").transform.Rotate(0.0f, -Input.GetAxis("Horizontal") * speed, 0.0f);
+
         }
+
     }
 
     void SwitchBackToSideCamera()
     {
-        if (mainManager.isCameraCloseUp && Input.GetKeyDown(KeyCode.K) && mainManager.toastViewCamera.gameObject != null)
+        if (mainManager.isCameraCloseUp && Input.GetKeyDown(KeyCode.L) && mainManager.toastViewCamera.gameObject != null)
         {
             StartCoroutine(mainManager.lookAtToast(2));
         }
     }
+
 }
