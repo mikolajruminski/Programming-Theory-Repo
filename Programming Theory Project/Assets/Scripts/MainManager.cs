@@ -24,15 +24,15 @@ public class MainManager : MonoBehaviour
     //Variables
     int currentToaster;
     Vector3 currentToasterVector;
-    bool isTosterPicked = false;
     [SerializeField] float speed = 1f;
     float speed2 = 130;
-    public bool isSideCameraActive = false;
     [SerializeField] private AnimationCurve _curve;
     [SerializeField] private AnimationCurve curve;
+    public bool isSideCameraActive = false;
     public bool hasSpawned = false;
-
     public bool isLerping = false;
+    bool isTosterPicked = false;
+
     //cameras
 
     public Camera mainCamera, sideCamera, closeUpCamera, toastViewCamera;
@@ -66,17 +66,7 @@ public class MainManager : MonoBehaviour
 
     void LateUpdate()
     {
-        if (sideCamera.gameObject != null && Input.GetKey(KeyCode.L) && isInPlace && isLerping == false)
-        {
-            Debug.Log("fadeMainCamera!");
-            StartCoroutine(fadeMainCamera(2));
-        }
-        else if (closeUpCamera.gameObject != null && Input.GetKey(KeyCode.L) && isSideCameraActive && isLerping == false && hasSpawned == false)
-        {
-            Debug.Log("SideToCloseUpCamera");
-            StartCoroutine(SideToCloseupCamera(2));
-        }
-
+        deFadeCamera();
     }
 
     public void Toast(int number)
@@ -107,45 +97,6 @@ public class MainManager : MonoBehaviour
                     uberTosterScript.startToastingGrilledCheese();
                 }
                 break;
-        }
-    }
-
-    void SpawnButtons(int number)
-    {
-        if (isTosterPicked && number == 0)
-        {
-            findInitialToster = GameObject.FindGameObjectWithTag("Toaster");
-            if (findInitialToster.name == "RegularToster(Clone)")
-            {
-                buttons[0].SetActive(true);
-                buttons[0].transform.localPosition = new Vector3(-93.8000031f, -44.9000015f, 32);
-
-            }
-            else if (findInitialToster.name == "deluxeToaster(Clone)")
-            {
-                for (int i = 0; i < buttons.Count - 1; i++)
-                {
-                    buttons[i].SetActive(true);
-                }
-
-                buttons[0].transform.localPosition = new Vector3(-124.400002f, -104.599998f, 32);
-                buttons[1].transform.localPosition = new Vector3(-124, -140.300003f, 32);
-
-            }
-            else if (findInitialToster.name == "UltimateToster(Clone)")
-            {
-                for (int i = 0; i < buttons.Count; i++)
-                {
-                    buttons[i].SetActive(true);
-                }
-            }
-        }
-        else
-        {
-            for (int i = 0; i < buttons.Count; i++)
-            {
-                buttons[i].SetActive(false);
-            }
         }
     }
 
@@ -211,7 +162,7 @@ public class MainManager : MonoBehaviour
                 yield return new WaitForSeconds(1);
                 lights[2].gameObject.SetActive(true);
                 src.Play();
-                lerp();
+                StartCoroutine(lerpButtons(0));
 
                 isInPlace = true;
                 break;
@@ -220,7 +171,7 @@ public class MainManager : MonoBehaviour
 
                 time = 0;
                 isInPlace = false;
-                StartCoroutine(deLerpButtons());
+                StartCoroutine(lerpButtons(1));
                 while (time < 3.5f)
                 {
                     sideCamera.transform.position = Vector3.SmoothDamp(sideCamera.transform.position, mainCameraInitialPosition,
@@ -261,7 +212,7 @@ public class MainManager : MonoBehaviour
         {
             case 1:
                 isInPlace = false;
-                StartCoroutine(deLerpButtons());
+                StartCoroutine(lerpButtons(1));
                 time = 0;
 
                 while (time < 3.5f)
@@ -282,14 +233,11 @@ public class MainManager : MonoBehaviour
                 sideCamera.gameObject.SetActive(false);
                 closeUpCamera.gameObject.SetActive(true);
                 isSideCameraActive = true;
-                SpawnButtons(0);
-
                 break;
 
             case 2:
                 time = 0;
                 isSideCameraActive = false;
-                SpawnButtons(1);
                 while (time < 3.2f)
                 {
                     closeUpCamera.transform.position = Vector3.SmoothDamp(closeUpCamera.transform.position, sideCameraInitialPosition,
@@ -308,7 +256,7 @@ public class MainManager : MonoBehaviour
 
                 sideCamera.gameObject.SetActive(true);
                 closeUpCamera.gameObject.SetActive(false);
-                StartCoroutine(lerpButtons());
+                StartCoroutine(lerpButtons(0));
                 hasSpawned = false;
                 isInPlace = true;
                 break;
@@ -316,8 +264,6 @@ public class MainManager : MonoBehaviour
 
 
     }
-
-
     public IEnumerator lookAtToast(int number)
     {
         switch (number)
@@ -389,15 +335,15 @@ public class MainManager : MonoBehaviour
                 toastViewCamera.transform.position = toastViewCameraInitialPosition;
                 toastViewCamera.transform.rotation = toastViewCameraInitialRotation;
                 isCameraCloseUp = true;
-                StartCoroutine(lerpButtons());
+                StartCoroutine(lerpButtons(0));
                 isSideCameraActive = false;
                 break;
 
             case 2:
-                
+
                 isCameraCloseUp = false;
                 getScriptForToaster();
-                StartCoroutine(deLerpButtons());
+                StartCoroutine(lerpButtons(1));
                 regularTosterScript.lampSmallLights(0, 1);
                 lerpSpeed = 0.2f;
                 time = 0;
@@ -435,7 +381,7 @@ public class MainManager : MonoBehaviour
 
                 respawnToaster(currentToaster, currentToasterVector);
 
-                while (time < 0.08f)
+                while (time < 0.12f)
                 {
                     toastViewCamera.transform.position = Vector3.Lerp(toastViewCamera.transform.position, closeUpCameraInitialPosition, _curve.Evaluate(time));
                     toastViewCamera.transform.rotation = Quaternion.Lerp(toastViewCamera.transform.rotation, closeUpCameraInitialRotation, _curve.Evaluate(time));
@@ -459,7 +405,6 @@ public class MainManager : MonoBehaviour
         }
 
     }
-
     IEnumerator loadMenu()
     {
         yield return new WaitForSeconds(2);
@@ -468,44 +413,52 @@ public class MainManager : MonoBehaviour
         lights[3].gameObject.SetActive(true);
         src.Play();
     }
-
-    IEnumerator lerpButtons()
+    IEnumerator lerpButtons(int number)
     {
-        isLerping = true;
-        yield return new WaitForSeconds(1);
-        float x = 0f;
-        float duration = 0.9f;
-        while (x < duration)
-        {
-            adCanvas.alpha = Mathf.Lerp(0, 1, x / duration);
-            x += Time.deltaTime;
-            yield return null;
-        }
-        adCanvas.alpha = 1;
-        isLerping = false;
-    }
 
-    IEnumerator deLerpButtons()
-    {
-        isLerping = true;
-        float x = 0f;
-        float duration = 0.9f;
-        while (x < duration)
+        switch (number)
         {
-            adCanvas.alpha = Mathf.Lerp(1, 0, x / duration);
-            x += Time.deltaTime;
-            yield return null;
-        }
-        adCanvas.alpha = 0;
-        isLerping = false;
-    }
 
-    void lerp()
-    {
-        if (isLerping == false)
-        {
-            StartCoroutine(lerpButtons());
+            case 0:
+                float x;
+                float duration;
+                if (!isLerping)
+                {
+
+                    x = 0f;
+                    duration = 0.9f;
+                    isLerping = true;
+                    yield return new WaitForSeconds(1);
+
+                    while (x < duration)
+                    {
+                        adCanvas.alpha = Mathf.Lerp(0, 1, x / duration);
+                        x += Time.deltaTime;
+                        yield return null;
+                    }
+                    adCanvas.alpha = 1;
+                    isLerping = false;
+                }
+                break;
+
+            case 1:
+                isLerping = true;
+                x = 0f;
+                duration = 0.9f;
+                while (x < duration)
+                {
+                    adCanvas.alpha = Mathf.Lerp(1, 0, x / duration);
+                    x += Time.deltaTime;
+                    yield return null;
+                }
+                adCanvas.alpha = 0;
+                isLerping = false;
+
+                break;
+
         }
+
+
     }
     void respawnToaster(int number, Vector3 position)
     {
@@ -560,5 +513,19 @@ public class MainManager : MonoBehaviour
         closeUpCameraInitialPosition = closeUpCamera.transform.position;
         closeUpCameraInitialRotation = closeUpCamera.transform.rotation;
 
+    }
+
+    void deFadeCamera()
+    {
+        if (sideCamera.gameObject != null && Input.GetKey(KeyCode.L) && isInPlace && isLerping == false)
+        {
+            Debug.Log("fadeMainCamera!");
+            StartCoroutine(fadeMainCamera(2));
+        }
+        else if (closeUpCamera.gameObject != null && Input.GetKey(KeyCode.L) && isSideCameraActive && isLerping == false && hasSpawned == false)
+        {
+            Debug.Log("SideToCloseUpCamera");
+            StartCoroutine(SideToCloseupCamera(2));
+        }
     }
 }

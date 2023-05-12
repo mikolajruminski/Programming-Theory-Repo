@@ -45,9 +45,10 @@ public class mouseHoverOver : MonoBehaviour
             StartCoroutine(mainManager.SideToCloseupCamera(1));
         }
 
-        if (mainManager.sideCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
+        if (mainManager.closeUpCamera.gameObject != null && rendere.gameObject.name != "Cube" && mainManager.isSideCameraActive)
         {
             StartCoroutine(pushButtons(offset));
+            whichToToast();
         }
     }
 
@@ -74,6 +75,23 @@ public class mouseHoverOver : MonoBehaviour
                 time += Time.deltaTime;
                 yield return null;
 
+            }
+        }
+    }
+    void whichToToast()
+    {
+        List<GameObject> buttons = new List<GameObject>();
+
+        foreach (GameObject item in GameObject.FindGameObjectsWithTag("toastBread")) 
+        {
+              buttons.Add(item);
+        }
+
+        for (int i = 0; i < buttons.Count; i++) 
+        {
+            if (this.gameObject == buttons[i]) 
+            {
+                mainManager.Toast(i);
             }
         }
     }

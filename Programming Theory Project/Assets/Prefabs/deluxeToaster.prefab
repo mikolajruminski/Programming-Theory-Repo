@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593702821318496051}
   m_LocalRotation: {x: 0, y: 0.11823068, z: 0, w: 0.9929862}
-  m_LocalPosition: {x: -0.01078, y: -0.00003, z: 0.00588}
+  m_LocalPosition: {x: -0.01085, y: -0.00003, z: 0.00481}
   m_LocalScale: {x: 0.048541095, y: 0.17285037, z: 0.040446367}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1077,7 +1077,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  smallLights: []
   toastedBagel: {fileID: 6687911812159269421, guid: e9ee062fd5f9def4da0698a4db27e3c0, type: 3}
 --- !u!1 &3876939733632253418
 GameObject:
@@ -1198,8 +1197,8 @@ Transform:
   - {fileID: 3336327314327331222}
   - {fileID: 8380064984165514385}
   - {fileID: 3963900354872045859}
-  - {fileID: 423503928806624420}
   - {fileID: 4710811105446789095}
+  - {fileID: 423503928806624420}
   - {fileID: 1548211340610300590}
   - {fileID: 8467919400321364784}
   - {fileID: 6967672700930432637}
@@ -1556,8 +1555,8 @@ GameObject:
   - component: {fileID: 3375119061971223897}
   - component: {fileID: 357123233275551224}
   m_Layer: 0
-  m_Name: male 1.002
-  m_TagString: Untagged
+  m_Name: male 1.001
+  m_TagString: toastBread
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1575,7 +1574,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 980592834344493525}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &2446410054059038404
 MeshFilter:
@@ -1652,10 +1651,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.010000001
-  m_Height: 0.019850835
+  m_Radius: 0.011208748
+  m_Height: 0.032135986
   m_Direction: 1
-  m_Center: {x: 4.1391188e-13, y: -0.000022931019, z: 0}
+  m_Center: {x: 9.055278e-11, y: -0.000022930823, z: 0.0017332787}
 --- !u!1 &6190340574315573998
 GameObject:
   m_ObjectHideFlags: 0
@@ -2034,8 +2033,8 @@ GameObject:
   - component: {fileID: 1233853341775799224}
   - component: {fileID: 7595013906478689822}
   m_Layer: 0
-  m_Name: male 1.001
-  m_TagString: Untagged
+  m_Name: male 1.002
+  m_TagString: toastBread
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2053,7 +2052,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 980592834344493525}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5376560800995121357
 MeshFilter:
@@ -2130,10 +2129,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.010000001
-  m_Height: 0.019850835
+  m_Radius: 0.011681469
+  m_Height: 0.0334913
   m_Direction: 1
-  m_Center: {x: 4.1391188e-13, y: -0.000022871414, z: 0}
+  m_Center: {x: 1.2592088e-10, y: -0.000022871542, z: 0.0024111345}
 --- !u!1 &8101125404366333952
 GameObject:
   m_ObjectHideFlags: 0

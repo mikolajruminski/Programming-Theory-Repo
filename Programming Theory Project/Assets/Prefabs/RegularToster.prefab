@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7903418720870322634}
   m_Layer: 0
   m_Name: male 1.002
-  m_TagString: Untagged
+  m_TagString: toastBread
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,10 +110,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 1.3516129
-  m_Height: 2.7036345
+  m_Radius: 1.4504378
+  m_Height: 2.9013143
   m_Direction: 1
-  m_Center: {x: -0.00028691854, y: -0.0026271252, z: 0.35164475}
+  m_Center: {x: -0.00036756543, y: -0.0027231555, z: 0.4504797}
 --- !u!1 &479857004162349065
 GameObject:
   m_ObjectHideFlags: 0
