@@ -27,7 +27,7 @@ public class Regular_Toster : MonoBehaviour
     }
 
     //CORUTINES
-    protected IEnumerator Toast(int lightNumber, GameObject toastType, Quaternion rotation, string toastCloneName, Vector3 jumpPosition)
+    protected IEnumerator Toast(int lightNumber, GameObject toastType, Quaternion rotation, string toastCloneName, Vector3 jumpPosition) //abstraction
     {
         if (mainManager.hasSpawned == false)
         {
@@ -55,7 +55,7 @@ public class Regular_Toster : MonoBehaviour
 
     }
 
-    protected IEnumerator playSounds()
+    protected IEnumerator playSounds() //abstraction
     {
         mainManager.src.clip = mainManager.reflectorSounds[1];
         mainManager.src.Play();

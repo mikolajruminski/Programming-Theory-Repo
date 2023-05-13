@@ -62,12 +62,12 @@ public class MainManager : MonoBehaviour
         getInitialCameraTransforms();
     }
 
-    void LateUpdate()
+    void LateUpdate() // abstraction
     {
         deFadeCamera();
     }
 
-    public void Toast(int number)
+    public void Toast(int number)// abstraction
     {
         switch (number)
         {
@@ -98,7 +98,7 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public void SpawnPickedToster(int number, Vector3 position)
+    public void SpawnPickedToster(int number, Vector3 position)// abstraction
     {
         if (number == 0)
         {
@@ -125,7 +125,7 @@ public class MainManager : MonoBehaviour
     }
 
     //COROUTINES
-    IEnumerator fadeMainCamera(int number)
+    IEnumerator fadeMainCamera(int number)// abstraction
     {
         float time = 0;
 
@@ -202,7 +202,7 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    public IEnumerator SideToCloseupCamera(int number)
+    public IEnumerator SideToCloseupCamera(int number)// abstraction
     {
         float time = 0;
 
@@ -262,7 +262,7 @@ public class MainManager : MonoBehaviour
 
 
     }
-    public IEnumerator lookAtToast(int number)
+    public IEnumerator lookAtToast(int number)// abstraction
     {
         switch (number)
         {
@@ -403,7 +403,7 @@ public class MainManager : MonoBehaviour
         }
 
     }
-    IEnumerator loadMenu()
+    IEnumerator loadMenu()// abstraction
     {
         yield return new WaitForSeconds(2);
         Canvas.gameObject.SetActive(true);
@@ -411,7 +411,7 @@ public class MainManager : MonoBehaviour
         lights[3].gameObject.SetActive(true);
         src.Play();
     }
-    IEnumerator lerpButtons(int number)
+    IEnumerator lerpButtons(int number)// abstraction
     {
 
         switch (number)
@@ -458,7 +458,7 @@ public class MainManager : MonoBehaviour
 
 
     }
-    void respawnToaster(int number, Vector3 position)
+    void respawnToaster(int number, Vector3 position)// abstraction
     {
         switch (number)
         {
@@ -474,7 +474,7 @@ public class MainManager : MonoBehaviour
                 break;
         }
     }
-    void destroyObjects(int number)
+    void destroyObjects(int number)// abstraction
     {
         switch (number)
         {
@@ -493,14 +493,14 @@ public class MainManager : MonoBehaviour
         }
     }
 
-    void getScriptForToaster()
+    void getScriptForToaster()// abstraction
     {
         tosterType = GameObject.FindGameObjectWithTag("Toaster");
         regularTosterScript = tosterType.GetComponent<Regular_Toster>();
         zaciagnikScript = GameObject.Find("Canvas").GetComponent<zaciagnijZaciagnik>();
     }
 
-    void getInitialCameraTransforms()
+    void getInitialCameraTransforms()// abstraction
     {
         toastViewCameraInitialPosition = toastViewCamera.transform.position;
         toastViewCameraInitialRotation = toastViewCamera.transform.rotation;
@@ -513,7 +513,7 @@ public class MainManager : MonoBehaviour
 
     }
 
-    void deFadeCamera()
+    void deFadeCamera()// abstraction
     {
         if (sideCamera.gameObject != null && Input.GetKey(KeyCode.L) && isInPlace && isLerping == false)
         {
