@@ -97,8 +97,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f0660e34f035004bba417aa4e98b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pos1: {x: -0.02, y: 2.26, z: -8.53}
-  pos2: {x: -0.02, y: 2.28, z: -8.53}
+  pos1: {x: -0.03, y: 2.26, z: -8.53}
+  pos2: {x: -0.03, y: 2.28, z: -8.53}
   _curve:
     serializedVersion: 2
     m_Curve:
@@ -123,5 +123,4 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  coroutine: 0
   speed: 0.54

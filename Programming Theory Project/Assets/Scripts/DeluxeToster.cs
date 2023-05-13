@@ -5,6 +5,7 @@ using UnityEngine;
 public class DeluxeToster : Regular_Toster
 {
     public GameObject toastedBagel;
+    
     // Start is called before the first frame update
     void Start()
     {

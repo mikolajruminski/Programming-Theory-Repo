@@ -1470,7 +1470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ee710c12a0fe44448ddd9bc30f57061, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toastTime: 3
+  m_toastTime: 3
   toastedBread: {fileID: 7964451725977634568, guid: a395878964af0b745b80854188dcd7e9, type: 3}
   animationCurve:
     serializedVersion: 2

@@ -1051,7 +1051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a62260457ccd8e94ebd2d11aab921bfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  toastTime: 2
+  m_toastTime: 2
   toastedBread: {fileID: 7964451725977634568, guid: a395878964af0b745b80854188dcd7e9, type: 3}
   animationCurve:
     serializedVersion: 2
@@ -1666,7 +1666,7 @@ GameObject:
   - component: {fileID: 8617717760152761798}
   m_Layer: 0
   m_Name: pivot
-  m_TagString: pivot
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -7,14 +7,13 @@ public class MainManager : MonoBehaviour
 {
     //GameObjects
     GameObject tosterType;
-    [SerializeField] GameObject Canvas;
-    [SerializeField] GameObject menuScreen;
-    [SerializeField] public GameObject ADbuttons;
+    [SerializeField] GameObject Canvas; //encapsulation
+    [SerializeField] GameObject menuScreen; //encapsulation
+    [SerializeField] public GameObject ADbuttons; //encapsulation
     CanvasGroup adCanvas;
-    GameObject findInitialToster;
-    [SerializeField] List<GameObject> buttons = new List<GameObject>();
-    [SerializeField] List<GameObject> toasters = new List<GameObject>();
-    [SerializeField] List<GameObject> lights = new List<GameObject>();
+    [SerializeField] public List<GameObject> infoTab = new List<GameObject>(); //encapsulation
+    [SerializeField] List<GameObject> toasters = new List<GameObject>(); //encapsulation
+    [SerializeField] List<GameObject> lights = new List<GameObject>(); //encapsulation
 
     //Scripts
     Regular_Toster regularTosterScript;
@@ -24,10 +23,9 @@ public class MainManager : MonoBehaviour
     //Variables
     int currentToaster;
     Vector3 currentToasterVector;
-    [SerializeField] float speed = 1f;
-    float speed2 = 130;
-    [SerializeField] private AnimationCurve _curve;
-    [SerializeField] private AnimationCurve curve;
+    [SerializeField] float speed = 1f; //encapsulation
+    float speed2 {get;} = 130; //encapsulation
+    [SerializeField] private AnimationCurve _curve; //encapsulation
     public bool isSideCameraActive = false;
     public bool hasSpawned = false;
     public bool isLerping = false;
@@ -48,10 +46,10 @@ public class MainManager : MonoBehaviour
     //Last lerping, 3 positions + rotation
 
     [SerializeField] Vector3 velocity = Vector3.zero;
-    Vector3 rotPos1 = new Vector3(-19f, -269.81f, 0f);
-    Vector3 rotPos2 = new Vector3(0, -180, 0);
-    Vector3 pos1 = new Vector3(-2.073f, 1.53f, -7.375f);
-    Vector3 pos2 = new Vector3(-0.03f, 1.53f, -6.913f);
+    Vector3 rotPos1 { get; } = new Vector3(-19f, -269.81f, 0f); //encapsulation
+    Vector3 rotPos2 { get; } = new Vector3(0, -180, 0); //encapsulation
+    Vector3 pos1 { get; } = new Vector3(-2.073f, 1.53f, -7.375f); //encapsulation
+    Vector3 pos2 { get; } = new Vector3(-0.03f, 1.53f, -6.913f); //encapsulation
     Vector3 mainCameraInitialPosition, toastViewCameraInitialPosition, sideCameraInitialPosition, closeUpCameraInitialPosition;
     Quaternion mainCameraInitialRotation, toastViewCameraInitialRotation, sideCameraInitialRotation, closeUpCameraInitialRotation;
 

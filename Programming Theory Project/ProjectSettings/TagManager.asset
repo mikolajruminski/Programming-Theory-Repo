@@ -9,9 +9,6 @@ TagManager:
   - Toast
   - pivot
   - smallLight
-  - toastToast
-  - toastBagel
-  - toastCheese
   - toastBread
   layers:
   - Default

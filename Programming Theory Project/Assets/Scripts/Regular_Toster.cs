@@ -6,24 +6,24 @@ public class Regular_Toster : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    [SerializeField] protected float toastTime;
-    [SerializeField] GameObject toastedBread;
+    [SerializeField] protected float m_toastTime; //encapsulation
+    [SerializeField] GameObject toastedBread; //encapsulation
     protected MainManager mainManager;
     protected zaciagnijZaciagnik zaciagnikScript;
-    [SerializeField] AnimationCurve animationCurve;
+    [SerializeField] AnimationCurve animationCurve; //encapsulation
     List<GameObject> smallLights = new List<GameObject>();
 
     //Vectors
     Vector3 endPosition = new Vector3(-0.04f, 2.26f, -8.53f);
     float m_Hue = 8, m_Saturation = 88, m_Value = 100, m_value2 = 53;
-    
+
     void Start()
     {
         getInitialScripts();
     }
     public void startToasting()
     {
-        StartCoroutine(Toast(0, toastedBread, new Quaternion(-0.707106829f, 0, 0, 0.707106829f), "tostWypieczony(Clone)",  endPosition));
+        StartCoroutine(Toast(0, toastedBread, new Quaternion(-0.707106829f, 0, 0, 0.707106829f), "tostWypieczony(Clone)", endPosition));
     }
 
     //CORUTINES
@@ -37,11 +37,11 @@ public class Regular_Toster : MonoBehaviour
             float timeElapsed = 0;
             GameObject _wskaz = GameObject.FindGameObjectWithTag("pivot");
             lampSmallLights(lightNumber, 0);
-            while (timeElapsed < toastTime)
+            while (timeElapsed < m_toastTime)
             {
                 if (_wskaz != null)
                 {
-                    _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0, 0)), (timeElapsed / 45) / toastTime);
+                    _wskaz.transform.rotation = Quaternion.Lerp(_wskaz.transform.rotation, Quaternion.Euler(new Vector3(-140f, 0, 0)), (timeElapsed / 45) / m_toastTime);
                 }
                 Debug.Log(timeElapsed);
                 timeElapsed += Time.deltaTime;
@@ -60,7 +60,7 @@ public class Regular_Toster : MonoBehaviour
         mainManager.src.clip = mainManager.reflectorSounds[1];
         mainManager.src.Play();
 
-        yield return new WaitForSeconds(toastTime);
+        yield return new WaitForSeconds(m_toastTime);
 
         mainManager.src.clip = mainManager.reflectorSounds[2];
         mainManager.src.Play();
